@@ -1,5 +1,4 @@
 version: '3'
-
 services:
   nginx:
     build: ./dockerfiles/nginx/
@@ -9,6 +8,7 @@ services:
     networks:
       - default
       - web
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=web"
@@ -19,12 +19,14 @@ services:
       - "traefik.http.routers.audit-secured.tls=true"
   php-fpm:
     build: ./dockerfiles/php-fpm/
+    restart: unless-stopped
     volumes:
       - ./src:/var/www/html
       - ~/.composer:/.composer
     user: 1000:1000
   mariadb:
-    image: mariadb:latest
+    image: linuxserver/mariadb:latest
+    restart: unless-stopped
     volumes: 
       - mariadb:/var/lib/mysql
     environment:
