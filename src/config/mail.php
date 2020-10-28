@@ -38,6 +38,8 @@ return [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
+            'from' => ['address' => 'gagan199.virk@gmail.com', 'name'=> 'Gagan'],
+            'secret' => '9b1bf5d3-80a82165',
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
@@ -81,12 +83,15 @@ return [
     | the same address. Here, you may specify a name and address that is
     | used globally for all e-mails that are sent by your application.
     |
-    */
+    
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
+    */
+
+   
 
     /*
     |--------------------------------------------------------------------------
