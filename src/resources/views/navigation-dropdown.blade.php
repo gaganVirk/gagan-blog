@@ -13,9 +13,25 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Home') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.about') }}" :active="request()->routeIs('pages.about')">
+                        {{ __('About') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.certifications') }}" :active="request()->routeIs('pages.certifications')">
+                        {{ __('Certifications') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
+                        {{ __('Posts') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
+                        {{ __('Contact') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
+                        {{ __('Create Post') }}
                     </x-jet-nav-link>
                 </div>
+                
             </div>
 
             <!-- Settings Dropdown -->
