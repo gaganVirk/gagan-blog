@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,10 +24,13 @@ Route::get('/about', function() {
     return view('pages.about');
 });
 
-Route::resource('posts', 'App\Http\Controllers\PostsController');
-
-
 Route::get('/send-email', [OrderController::class, 'sendEmail']);
+
+Route::resource('posts', 'App\Http\Controllers\PostsController')->middleware(['auth:sanctum', 'verified']);
+Route::resource('categories', 'App\Http\Controllers\CategoriesController')->middleware(['auth:sanctum', 'verified']);
+Route::post('/store-category', [CategoriesController::class, 'storeCategory'])->name('categories.storeCategory')->middleware(['auth:sanctum', 'verified']);
+
+Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image')->middleware(['auth:sanctum', 'verified']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function() {
     return view('dashboard');
@@ -35,9 +40,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/about', function () {
     return view('pages.about');
 })->name('pages.about');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/posts', function () {
-    return view('posts.index');
-})->name('posts.index');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/certifications', function () {
     return view('pages.certifications');
@@ -50,3 +52,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/contact', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/create-post', function () {
     return view('posts.create-post');
 })->name('posts.create-post');
+

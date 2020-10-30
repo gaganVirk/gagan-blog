@@ -1,27 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Category;
+
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Image;
 
-class PostsController extends Controller
+class CategoriesController extends Controller
 {
-    public function uploadImage(Request $request) {
-        $file = $request->file('upload');
+    public function storeCategory(Request $request) {
+        $category = new Category();
+        $category->categoryName = $request->input('categoryName');
+        $category->save();
 
-        $path = $file->store('yolo', 'public');
-        $filename = $request->file('upload')->getClientOriginalName();
-
-        $image = new Image();
-        $image->upload_image = $filename;
-        $image->generated_name = $file->hashName();
-        $image->path = url('storage/'.$path);
-        $image->save();
-
-        return ['url' => url('storage/'.$path)];
+        return redirect()->route('posts.create-post');
     }
 
     /**
@@ -31,11 +22,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $post = Post::all();
-
-        return view('posts.index')->with([
-            'posts' => $post
-        ]);
+        //
     }
 
     /**
@@ -56,23 +43,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'category' => 'required',
-            'title' => 'required',
-            'body' => 'required'
-        ]);
-
-        $post = new Post();
-        $post->title = $request->input('title');
-        $post->body = $request->input('body');
-
-        $posts = Post::all();
-        foreach($posts as $p) {
-            $p->category = $post;
-        }
-
-        $post->save();
-        return redirect('/posts')->with('success', 'Post Created');
+        //
     }
 
     /**
@@ -83,8 +54,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        return view('posts.show')->with('post', $post);
+        //
     }
 
     /**

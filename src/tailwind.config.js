@@ -17,6 +17,7 @@ module.exports = {
 
     variants: {
         opacity: ['responsive', 'hover', 'focus', 'disabled'],
+        gridTemplateColumns: ['responsive', 'hover', 'focus'],
     },
 
     plugins: [require('@tailwindcss/ui')],
