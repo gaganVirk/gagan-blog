@@ -13,9 +13,12 @@ class PostsController extends Controller
     public function filterByCategory(Category $category)
     {
         $posts = $category->posts;
+        $users = DB::table('posts', '>', 100)->paginate('2');
+
 
         return view('posts.index')->with([
             'posts' => $posts,
+            'users' => $users
         ]);
     }
 
@@ -43,8 +46,7 @@ class PostsController extends Controller
     {
         $post = Post::all();
 
-        //$users = DB::table('posts', '>', 100)->paginate('2');
-        $users = Post::simplePaginate(4);
+        $users = DB::table('posts', '>', 100)->paginate('2');
 
         return view('posts.index')->with([
             'posts' => $post,

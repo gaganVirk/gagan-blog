@@ -36,7 +36,7 @@
 
         <div class="form-group">
             <span class="text-gray-700">Title</span>
-            <textarea class="form-textarea block w-full" rows="30" name="body" id="body" {{ old('body') }}></textarea>
+            <textarea class="form-textarea block w-full" name="body" id="body" {{ old('body') }}></textarea>
         </div>
 
         <div class="text-center">

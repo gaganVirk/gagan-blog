@@ -20,15 +20,7 @@
             }
         </style>
         <div class="relative flex items-top min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        {{--    <div class="hidden fixed top-0 left-0 px-6 py-4 sm:block flex-wrap bg-teal-500 p-6">
-        
-            <a href="{{ url('/') }}" class="text-sm text-gray-700 underline">Home</a>
-            <a href="{{ url('/about') }}" class="text-sm text-gray-700 underline">About</a>
-            <a href="{{ url('/posts') }}" class="text-sm text-gray-700 underline">Posts</a>
-        
-            <a href="{{ url('/send-email') }}" class="text-sm text-gray-700 underline">Send-Email</a>
-            </div> --}}
-        
+       
             @if (Route::has('login'))
         
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
