@@ -1,12 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Category;
 
 use Illuminate\Http\Request;
+use App\Models\Certification;
 
-class CategoriesController extends Controller
+class CertificationsController extends Controller
 {
+    public function certUpload(Request $req) {
+        $req->validate([
+            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,|max:2048'
+        ]);
+
+        $cert = new Certification();
+
+        if($req->file()) {
+            $certName = $req->file->getClientOriginalName();
+            $filePath = $req->file('file')->storeAs('uploads', $certName, 'public');
+
+            $cert->name = $req->file->getClientOriginalName();
+            $cert->filepath = '/storage/' . $filePath;
+            $cert->save();
+
+            return redirect('/certifications')->with('success', 'File has been uploaded.')
+                         ->with('file', $certName);
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +34,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $certs = Certification::all();
+
+        return view('certifications.index')->with([
+            'certs' => $certs
+        ]);
     }
 
     /**
@@ -24,7 +48,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -35,9 +59,7 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->all());
-
-        return redirect()->route('posts.create-post');
+        //
     }
 
     /**
@@ -46,9 +68,17 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, Certification $cert)
     {
-        //
+        $certs = Certification::find($id);
+
+        header("Content-type: application/pdf");
+        header("Content-length: " . filesize($cert->filepath));
+        readfile($cert->filepath);
+
+        return view('/cetifications')->with([
+            'certs' => $certs
+        ]);
     }
 
     /**

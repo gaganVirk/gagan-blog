@@ -1,11 +1,9 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('About') }}
-        </h2>
-    </x-slot>
-    <h1 class="text-center font-semibold text-xl">Create Post</h1>
-    <form method="post" action="{{ route('categories.storeCategory') }}" enctype="multipart/form-data">
+@extends('layouts.wrapper')
+
+@section('title', 'Create Posts')
+
+@section('content')
+    <form method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <input type="text" class="form-input" name="categoryName" id="categoryName" placeholder="Create New Category" value="{{ old('categoryName') }}">
@@ -17,11 +15,18 @@
         @csrf
         <div class="form-group mt-1">
             <span class="text-gray-700 mr-8 mt-1 w-full">Please choose category for the post:   </span>
-    
-            <select class="border m-8" name="category" id="category">
-                    <option value="select">Select Category</option>
-                    <option name="category" id="category">Docker</option>
+
+            <select class="border m-8" name="category_id" id="category">
+                    <option value="">Select Category</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                    @endforeach
+                    <input class="border rounded px-8" type="submit" name="send" value="Manage Categories"/>
             </select>
+
+            @if($errors->has('category'))
+                <p>Error: {{ $errors->first('category') }}</p>
+            @endif
         </div>
 
         <div class="form-group justify-center">
@@ -65,5 +70,4 @@
                         console.error( error );
                 } );
     </script>
-   
-</x-app-layout>
+@endsection

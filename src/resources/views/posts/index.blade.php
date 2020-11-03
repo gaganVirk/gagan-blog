@@ -1,20 +1,22 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Post') }}
-        </h2>
-    </x-slot>
+@extends('layouts.wrapper')
+
+@section('title','All Posts')
+
+@section('content')
 
     <div class="grid grid-flow-col gap-4 pl-20">
-        <h1>Posts</h1>
         @if(count($posts) > 0) 
             @foreach($posts as $post)
             <a href="/posts/{{$post->id}}">{{ $post->title }}</a>
             <small>Written on {{ $post->created_at }}</small>
+            <p>Category: <a href="{{ route('posts.filterByCategory', $post->category) }}">{{ $post->category->categoryName }}</a></p>
             <hr/>
             @endforeach
         @else
             <p>No posts found</p>
         @endif
+
+        {{ $users->links() }}
     </div>
-</x-app-layout>
+
+@endsection

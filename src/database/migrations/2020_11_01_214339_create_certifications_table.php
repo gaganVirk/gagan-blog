@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCategoriesToPosts extends Migration
+class CreateCertificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddCategoriesToPosts extends Migration
      */
     public function up()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->string('category');
+        Schema::create('certifications', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('filepath');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +29,6 @@ class AddCategoriesToPosts extends Migration
      */
     public function down()
     {
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('category');
-        });
+        Schema::dropIfExists('certifications');
     }
 }

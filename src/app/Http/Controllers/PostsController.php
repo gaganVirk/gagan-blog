@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -9,6 +10,15 @@ use App\Models\Image;
 
 class PostsController extends Controller
 {
+    public function filterByCategory(Category $category)
+    {
+        $posts = $category->posts;
+
+        return view('posts.index')->with([
+            'posts' => $posts,
+        ]);
+    }
+
     public function uploadImage(Request $request) {
         $file = $request->file('upload');
 
@@ -33,8 +43,12 @@ class PostsController extends Controller
     {
         $post = Post::all();
 
+        //$users = DB::table('posts', '>', 100)->paginate('2');
+        $users = Post::simplePaginate(4);
+
         return view('posts.index')->with([
-            'posts' => $post
+            'posts' => $post,
+            'users' => $users
         ]);
     }
 
@@ -45,7 +59,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('categoryName')->get();
+
+        return view('posts.create-post')->with(compact('categories'));
     }
 
     /**
@@ -57,7 +73,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category' => 'required',
+            'category_id' => 'required|exists:categories,id',
             'title' => 'required',
             'body' => 'required'
         ]);
@@ -65,14 +81,11 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = $request->input('body');
-
-        $posts = Post::all();
-        foreach($posts as $p) {
-            $p->category = $post;
-        }
-
+        
+        $post->category_id = $request->input('category_id');
         $post->save();
-        return redirect('/posts')->with('success', 'Post Created');
+        
+        return redirect()->route('posts.index')->with('success', 'Post Created');
     }
 
     /**

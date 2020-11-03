@@ -14,7 +14,9 @@
             American Academy of Arts and Sciences, and author of the bestselling book Love and Math.
         </div>
     </div>
+    <div class="row-span-1 col-span-2 ...">ggg</div>
 
+  <hr/>
     <div class="flex md:flex-row-reverse flex-wrap">
         <div class="w-full md:w-3/4 bg-gray-500 p-4 text-center text-gray-200">
             <h3>Latest posts</h3>

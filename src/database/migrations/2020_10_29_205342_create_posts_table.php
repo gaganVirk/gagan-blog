@@ -17,9 +17,12 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->mediumText('body');
-            $table->rememberToken();
+            $table->unsignedBigInteger('category_id');
+
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
