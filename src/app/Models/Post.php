@@ -11,6 +11,7 @@ class Post extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Searchable;
 
     protected $fillable = [
         'category_id',
@@ -18,6 +19,11 @@ class Post extends Model
         'body',
         'cover_image'
     ];
+
+    public function searchableAs()
+    {
+        return 'posts_index';
+    }
 
     public function category()
     {

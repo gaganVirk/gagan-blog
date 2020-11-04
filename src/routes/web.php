@@ -5,6 +5,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CertificationsController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,9 +24,12 @@ Route::get('/', function () {
 });
 
 // To send an email using mail gun
-Route::get('/send-email', [OrderController::class, 'sendEmail']);
+//Route::get('/send-email', [OrderController::class, 'sendEmail']);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+
+    //Route for searching posts
+    Route::post('/search', [SearchController::class, 'search'])->name('pages.search');
     // Route for post categories
     Route::resource('categories', 'App\Http\Controllers\CategoriesController');
 
@@ -33,9 +37,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/dashboard', function() { return view('dashboard'); })->name('dashboard');
 
     // Contact page
-    Route::get('/contact', function () {
-        return view('pages.contact');
-    })->name('pages.contact');
+    Route::get('/contact', [PagesController::class, 'sendingEmail'])->name('pages.contact');
 
     // Certifications routes
     Route::resource('certifications', 'App\Http\Controllers\CertificationsController');

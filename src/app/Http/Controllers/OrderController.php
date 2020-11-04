@@ -18,7 +18,7 @@ class OrderController extends Controller
             'verification' => 'sdfsdf'
         ];
 
-        $to_email = "gagan@ocular.co.nz";
+        $to_email = "gagan@ocular.nz";
 
         Mail::to($to_email)->send(new OrderShipped($data)); 
        
@@ -30,6 +30,7 @@ class OrderController extends Controller
         else {
             return "<p> Failed! Your E-mail has not sent.</p>";
         } 
+        return view('pages.contact');
 
     }
 

@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
-
+use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class CategoriesController extends Controller
 {
+    public function Search(Request $request)
+    {
+        $search = $request->input('search');
+        $posts = Post::search($search)->get();
+
+        return view('pages.search')->with([
+            'posts' => $posts
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *

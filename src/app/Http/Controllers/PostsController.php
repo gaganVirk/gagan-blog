@@ -42,11 +42,11 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $post = Post::all();
-
-        $users = DB::table('posts', '>', 100)->paginate('2');
+        
+        $users = Post::latest()->paginate(5);
 
         return view('posts.index')->with([
             'posts' => $post,
@@ -82,7 +82,7 @@ class PostsController extends Controller
 
         $post = new Post();
         $post->title = $request->input('title');
-        $post->body = $request->input('body');
+        $post->body = strip_tags($request->input('body'));
         
         $post->category_id = $request->input('category_id');
         $post->save();
