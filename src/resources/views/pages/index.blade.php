@@ -22,10 +22,14 @@
 
         <h3 class="text-xl">Latest posts</h3>
         <div class="grid grid-rows-auto grid-flow-col">
-        @foreach($posts as $post)
-            <h1>{{ $post->title }}</h1>
-            <p>{{ $post->body }}</p>
-        @endforeach
+        @if(count($posts) > 1) 
+            @foreach($posts as $post)
+                <h1>{{ $post->title }}</h1>
+                <p>{{ $post->body }}</p>
+            @endforeach
+        @else
+            <p class="text-center">No Posts Found! </p>
+        @endif
         </div>
            
 

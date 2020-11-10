@@ -25,11 +25,9 @@
             <!-- Page Content -->
             <main>
                 {{ $slot }}
-                <footer>@include('layouts.footer')</footer>
             </main>
-
         </div>
-
+        <footer>@include('layouts.footer')</footer>
         @stack('modals')
 
         @livewireScripts

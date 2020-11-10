@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <div class="grid grid-flow-col gap-4 pl-20">
+    <div class="px-4 grid grid-flow-col gap-4">
         @if(count($posts) > 0) 
             @foreach($posts as $post)
-            <a href="/posts/{{$post->id}}">{{ $post->title }}</a>
+            <a class="text-xl" href="/posts/{{$post->id}}">{{ $post->title }}</a>
             <small>Written on {{ $post->created_at }}</small>
             <p>Category: <a href="{{ route('posts.filterByCategory', $post->category) }}">{{ $post->category->categoryName }}</a></p>
             <hr/>

@@ -7,7 +7,7 @@
         @csrf
         <div>
             <input type="text" class="form-input" name="categoryName" id="categoryName" placeholder="Create New Category" value="{{ old('categoryName') }}">
-            <input class="border text-xl rounded" type="submit" name="send" value="Save"/>
+            <input class="px-4 border text-xl rounded" type="submit" name="send" value="Save"/>
         </div>
     </form>
 
@@ -21,7 +21,7 @@
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                     @endforeach
-                    <input class="border rounded px-8" type="submit" name="send" value="Manage Categories"/>
+                    <input class="px-4 border rounded" type="submit" name="send" value="Manage Categories"/>
             </select>
 
             @if($errors->has('category'))
@@ -40,7 +40,7 @@
         </div>
 
         <div class="text-center">
-            <input class="border font-semibold text-xl" type="submit" name="send" value="Submit"> 
+            <input class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit" name="send" value="Submit"> 
         </div>
         
     </form>

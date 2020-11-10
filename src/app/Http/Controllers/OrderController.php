@@ -31,7 +31,6 @@ class OrderController extends Controller
             return "<p> Failed! Your E-mail has not sent.</p>";
         } 
         return view('pages.contact');
-
     }
 
     /**
