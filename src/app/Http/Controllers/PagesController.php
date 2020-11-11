@@ -16,17 +16,17 @@ class PagesController extends Controller
     }
 
     public function sendingEmail(Request $request) {
-        $data = [
-            'name' => 'Gagan',
-            'verification' => 'sdfsdf'
-        ];
-
         $to_email = config('mail.to.address');
+
+        $request->validate([
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'email' => 'required',
+            'message' => 'required'
+        ]);
 
         Mail::to($to_email)
             ->send(new ContactMail($request));
-
-       dd('done');
        
         if(Mail::failures() != 0) {
             return "<p> Success! Your E-mail has been sent.</p>";

@@ -24,19 +24,20 @@
                     <input class="px-4 border rounded" type="submit" name="send" value="Manage Categories"/>
             </select>
 
-            @if($errors->has('category'))
-                <p>Error: {{ $errors->first('category') }}</p>
-            @endif
+        <div class="px-4 pr-8">
+            @include('layouts.messages')
         </div>
 
-        <div class="form-group justify-center">
-            <span class="text-gray-700">Title</span>
-        <input type="text" class="form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{{ old('title') }}">
         </div>
 
-        <div class="form-group">
+        <div class="px-4 form-group justify-center">
             <span class="text-gray-700">Title</span>
-            <textarea class="form-textarea block w-full" name="body" id="body" {{ old('body') }}></textarea>
+        <input type="text" class="px-4 form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{{ old('title') }}">
+        </div>
+
+        <div class="px-4 form-group">
+            <span class="text-gray-700">Title</span>
+            <textarea class="px-4 form-textarea block w-full" name="body" id="body" {{ old('body') }}></textarea>
         </div>
 
         <div class="text-center">

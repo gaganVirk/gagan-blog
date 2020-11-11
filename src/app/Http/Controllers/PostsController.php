@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Validator;
 use App\Models\Post;
 use App\Models\Image;
 
@@ -72,14 +74,8 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        $this->validate($request, [
-            'category_id' => 'required|exists:categories,id',
-            'title' => 'required',
-            'body' => 'required'
-        ]);
-
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = strip_tags($request->input('body'));
