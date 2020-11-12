@@ -21,6 +21,9 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                         {{ __('Posts') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('pages.project') }}" :active="request()->routeIs('pages.project')">
+                        {{ __('Projects') }}
+                    </x-jet-nav-link>
                     <x-jet-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
                         {{ __('Contact') }}
                     </x-jet-nav-link>

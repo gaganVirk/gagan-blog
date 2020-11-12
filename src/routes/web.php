@@ -57,6 +57,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     // To upload images for the post
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
+
+    // Projects page
+    Route::get('/projects', [PagesController::class, 'project'])->name('pages.project');
 });
 
 

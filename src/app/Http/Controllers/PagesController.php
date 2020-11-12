@@ -46,4 +46,8 @@ class PagesController extends Controller
             'posts' => $posts
         ]);
     }
+
+    public function project() {
+        return view('pages.project');
+    }
 }
