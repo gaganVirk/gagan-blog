@@ -79,6 +79,9 @@ class PostsController extends Controller
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = strip_tags($request->input('body'));
+
+        $image = Image::all();
+        $post->cover_image = $request($image->images);
         
         $post->category_id = $request->input('category_id');
         $post->save();

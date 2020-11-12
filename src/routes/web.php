@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CertificationsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\BooksController;
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -60,6 +61,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     // Projects page
     Route::get('/projects', [PagesController::class, 'project'])->name('pages.project');
+
+    // Books page
+    Route::resource('books', BooksController::class);
 });
 
 
