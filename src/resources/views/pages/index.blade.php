@@ -19,7 +19,6 @@
 
 <div class="flex flex-wrap mt-8">
     <div class="w-full md:w-3/4 bg-gray-500 p-4 text-gray-200">
-
         <h3 class="text-xl">Latest posts</h3>
         <div class="grid grid-rows-auto grid-flow-col">
         @if(count($posts) > 1) 
@@ -30,9 +29,7 @@
         @else
             <p class="text-center">No Posts Found! </p>
         @endif
-        </div>
-           
-
+        </div>  
     </div>
     <div class="w-full md:w-1/4 bg-gray-400 p-4 text-center text-gray-700">
         <h3 class="text-xl">Recent Projects</h3>

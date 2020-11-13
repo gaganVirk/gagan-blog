@@ -16,7 +16,6 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('cover_image');
             $table->mediumText('body');
             $table->foreignId('book_category_id')->constrained('books_category');
 

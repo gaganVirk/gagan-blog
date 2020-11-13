@@ -27,11 +27,21 @@
                     <x-jet-nav-link href="{{ route('pages.project') }}" :active="request()->routeIs('pages.project')">
                         {{ __('Projects') }}
                     </x-jet-nav-link>
+        
+                    @auth
+                        <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
+                            {{ __('Create Post') }}
+                        </x-jet-nav-link>
+
+                        <x-jet-nav-link href="{{ route('books.book-review') }}" :active="request()->routeIs('books.book-review')">
+                            {{ __('Book Review') }}
+                        </x-jet-nav-link>
+                    @endauth
+                    
+                    
+
                     <x-jet-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
                         {{ __('Contact') }}
-                    </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
-                        {{ __('Create Post') }}
                     </x-jet-nav-link>
                         <!-- This is an example component -->
                     <x-jet-nav-link>
@@ -62,11 +72,11 @@
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                             <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out">
-                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                                {{-- <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /> --}}
                             </button>
                         @else
                             <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                <div>{{ Auth::user()->name }}</div>
+                                {{-- <div>{{ Auth::user()->name }}</div> --}}
 
                                 <div class="ml-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -83,9 +93,30 @@
                             {{ __('Manage Account') }}
                         </div>
 
-                        <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                            {{ __('Profile') }}
-                        </x-jet-dropdown-link>
+                        @auth
+                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                                {{ __('Profile') }}
+                            </x-jet-dropdown-link>
+
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-jet-dropdown-link href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                    {{ __('Logout') }}
+                                </x-jet-dropdown-link>
+                            </form>
+                        @else
+                            <x-jet-dropdown-link href="{{ route('login') }}">
+                                {{ __('Login') }}
+                            </x-jet-dropdown-link>
+
+                            <x-jet-dropdown-link href="{{ route('register') }}">
+                                {{ __('Register') }}
+                            </x-jet-dropdown-link>
+                        @endauth
 
                         @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
@@ -125,17 +156,6 @@
 
                             <div class="border-t border-gray-100"></div>
                         @endif
-
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-jet-dropdown-link href="{{ route('logout') }}"
-                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
-                                {{ __('Logout') }}
-                            </x-jet-dropdown-link>
-                        </form>
                     </x-slot>
                 </x-jet-dropdown>
             </div>
@@ -164,12 +184,12 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                    {{-- <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" /> --}}
                 </div>
 
                 <div class="ml-3">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    {{-- <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div> --}}
                 </div>
             </div>
 

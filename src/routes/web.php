@@ -25,16 +25,12 @@ use Illuminate\Support\Facades\Mail;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('welcome');
-
+})->name('welcome'); 
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     // pages controller 
     Route::get('/home', [PagesController::class, 'index'])->name('pages.index');
-
-    // Login dashboard provided by jetstream
-    //Route::get('/home', function() { return view('dashboard'); })->name('dashboard');
 
     //Route for searching posts
     Route::post('/search', [SearchController::class, 'search'])->name('pages.search');
@@ -46,7 +42,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/contact', [PagesController::class, 'showContactForm'])->name('pages.contact');
     Route::post('/contact/send', [PagesController::class, 'sendingEmail'])->name('pages.sendingEmail');
 
-
     // Certifications routes
     Route::resource('certifications', CertificationsController::class);
     Route::post('/upload-certificate', [CertificationsController::class, 'certUpload'])->name('certifications.upload-certs');
@@ -55,8 +50,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
     Route::get('/create-post', [PostsController::class, 'create'])->name('posts.create-post');
     Route::resource('posts', PostsController::class);
-
-    // To upload images for the post
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
 
     // Projects page
@@ -64,6 +57,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
 
     // Books page
     Route::resource('books', BooksController::class);
+    Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
+    Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
 });
 
 

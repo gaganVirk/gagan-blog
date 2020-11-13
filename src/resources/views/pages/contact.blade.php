@@ -7,15 +7,12 @@
 <div class="flex flex-wrap justify-center">
 <form class="w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <div class="px-4 pr-8">
-    @include('layouts.messages')
-    </div>
-
     <div class="px-4 pr-8 mb-6 md:mb-0">
         <label class="block uppercase text-xs font-bold mb-2 font-semibold" for="grid-first-name">
           First Name
         </label>
         <input class="appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Gagan" name="firstName" value="{{ old('firstName') }}">
+        <p class="text-red-500 text-xs italic">{{ $errors->first('firstName') }}</p>
     </div>
    
     <div class="px-4 pr-8 mb-6 md:mb-0">
@@ -23,24 +20,29 @@
           Last Name 
         </label>
         <input class="appearance-none block w-full bg-white-200  border rounded py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Virk" name="lastName" value="{{ old('lastName') }}">
+        <p class="text-red-500 text-xs italic">{{ $errors->first('lastName') }}</p>
     </div>
       <div class=" px-4">
         <label class="uppercase tracking-wide text-xs font-bold mb-2 font-semibold" for="grid-password">
           E-mail
         </label>
         <input class="appearance-none block w-full border border-gray-200 rounded py-3 px-4 mb-3" id="email" type="email" name="email" value="{{ old('email') }}">
+        <p class="text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
+
       </div>
       <div class="px-4">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 font-semibold" for="grid-password">
           Message
         </label>
         <textarea id="body" class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" id="message" name="message" value="{{ old('message') }}"></textarea>
+        <p class="text-red-500 text-xs italic">{{ $errors->first('message') }}</p>
+
       </div>
-        <div class="text-center">
-        <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit">
+      <div class="text-center">
+      <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit">
           Send
-        </button>
-        </div>
+      </button>
+      </div>
   </form>
 </div>
 

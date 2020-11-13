@@ -3,41 +3,35 @@
 @section('title', 'Create Posts')
 
 @section('content')
-    <form method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+    <form class="px-4" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <input type="text" class="form-input" name="categoryName" id="categoryName" placeholder="Create New Category" value="{{ old('categoryName') }}">
-            <input class="px-4 border text-xl rounded" type="submit" name="send" value="Save"/>
+            <input class="px-4 ml-4 border text-xl rounded" type="submit" name="send" value="Save"/>
         </div>
     </form>
 
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
-        <div class="form-group mt-1">
-            <span class="text-gray-700 mr-8 mt-1 w-full">Please choose category for the post:   </span>
-
-            <select class="border m-8" name="category_id" id="category">
+        <div class="px-4 mt-4  form-group mt-1">
+            <select class="border m-8" name="category_id" id="category" name="category">
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                     @endforeach
-                    <input class="px-4 border rounded" type="submit" name="send" value="Manage Categories"/>
+                    <input class="px-4 ml-4 text-xl border rounded" type="submit" name="send" value="Manage"/>
+                    <p class="text-red-500 text-xs italic">{{ $errors->first('category') }}</p>
             </select>
-
-        <div class="px-4 pr-8">
-            @include('layouts.messages')
         </div>
 
-        </div>
-
-        <div class="px-4 form-group justify-center">
-            <span class="text-gray-700">Title</span>
+        <div class="px-4 mt-4 form-group justify-center">
         <input type="text" class="px-4 form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{{ old('title') }}">
+        <p class="text-red-500 text-xs italic">{{ $errors->first('title') }}</p>
         </div>
 
-        <div class="px-4 form-group">
-            <span class="text-gray-700">Title</span>
-            <textarea class="px-4 form-textarea block w-full" name="body" id="body" {{ old('body') }}></textarea>
+        <div class="px-4 mt-4 form-group">
+            <textarea class="px-4 form-textarea block w-full" name="body" id="body" value="{{ old('body') }}"></textarea>
+            <p class="text-red-500 text-xs italic">{{ $errors->first('body') }}</p>
         </div>
 
         <div class="text-center">
