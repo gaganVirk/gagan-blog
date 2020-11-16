@@ -7,6 +7,7 @@
         @csrf
         <div>
             <input type="text" class="form-input" name="categoryName" id="categoryName" placeholder="Create New Category" value="{{ old('categoryName') }}">
+
             <input class="px-4 ml-4 border text-xl rounded" type="submit" name="send" value="Save"/>
         </div>
     </form>
@@ -14,14 +15,14 @@
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="px-4 mt-4  form-group mt-1">
-            <select class="border m-8" name="category_id" id="category" name="category">
+            <select class="border m-8" name="category_id" id="category_id" >
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
+                            <option value="{{ $category->id }}">{{ $category->categoryName }}</option>
                     @endforeach
-                    <input class="px-4 ml-4 text-xl border rounded" type="submit" name="send" value="Manage"/>
-                    <p class="text-red-500 text-xs italic">{{ $errors->first('category') }}</p>
             </select>
+            <input class="px-4 ml-4 text-xl border rounded" type="submit" name="send" value="Manage"/>
+            <p class="text-red-500 text-xs italic">{{ $errors->first('category_id') }}</p>
         </div>
 
         <div class="px-4 mt-4 form-group justify-center">
@@ -30,7 +31,7 @@
         </div>
 
         <div class="px-4 mt-4 form-group">
-            <textarea class="px-4 form-textarea block w-full" name="body" id="body" value="{{ old('body') }}"></textarea>
+            <textarea class="px-4 form-textarea block w-full" name="body" id="body">{{ old('body') }}</textarea>
             <p class="text-red-500 text-xs italic">{{ $errors->first('body') }}</p>
         </div>
 

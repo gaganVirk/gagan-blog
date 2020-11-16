@@ -17,15 +17,8 @@ class PagesController extends Controller
         return view('pages.contact');
     }
 
-    public function sendingEmail(Request $request) {
+    public function sendingEmail(StoreContactPost $request) {
         
-        $request->validate([
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => 'required',
-            'message' => 'required'
-        ]);
-
         $to_email = config('mail.to.address');
 
         Mail::to($to_email)

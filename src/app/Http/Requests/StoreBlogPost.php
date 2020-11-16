@@ -35,10 +35,22 @@ class StoreBlogPost extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'required|exists:categories,id',
+            'category_id' => 'required',
             'category' => 'required',
             'title' => 'required',
             'body' => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'category_id.required' => 'A category is required',
         ];
     }
 }

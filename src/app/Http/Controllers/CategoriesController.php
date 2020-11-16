@@ -45,6 +45,14 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'categoryName' => 'string | unique'
+        ]);
+
+        if($request->invalidate('categoryName')) {
+            return redirect()->route('posts.create-post');
+        }
+
         Category::create($request->all());
 
         return redirect()->route('posts.create-post');
