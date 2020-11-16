@@ -17,7 +17,6 @@ class Post extends Model
         'category_id',
         'title',
         'body',
-        'cover_image'
     ];
 
     public function searchableAs()

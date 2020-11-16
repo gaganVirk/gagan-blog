@@ -36,7 +36,6 @@ class StoreBlogPost extends FormRequest
     {
         return [
             'category_id' => 'required',
-            'category' => 'required',
             'title' => 'required',
             'body' => 'required',
         ];

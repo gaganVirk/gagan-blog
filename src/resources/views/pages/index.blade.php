@@ -23,8 +23,8 @@
         <div class="grid grid-rows-auto grid-flow-col">
         @if(count($posts) > 1) 
             @foreach($posts as $post)
-                <h1>{{ $post->title }}</h1>
-                <p>{{ $post->body }}</p>
+                <a href="/posts/{{$post->id}}"><h1>{{ $post->title }}</h1></a>
+                <p>{{ Str::limit($post->body, 100) }}</p>
             @endforeach
         @else
             <p class="text-center">No Posts Found! </p>

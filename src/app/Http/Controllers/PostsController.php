@@ -76,7 +76,6 @@ class PostsController extends Controller
      */
     public function store(StoreBlogPost $request)
     {
-        dd('test');
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = strip_tags($request->input('body'));
