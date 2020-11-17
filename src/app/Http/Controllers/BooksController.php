@@ -78,6 +78,13 @@ class BooksController extends Controller
      */
     public function show($id)
     {
+        $book = Book::find($id);
+        $image = BookImage::find($id);
+
+        return view('books.show')->with([
+            'book' => $book,
+            'image' => $image
+        ]);
     }
 
     /**

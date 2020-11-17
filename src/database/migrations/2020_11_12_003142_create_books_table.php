@@ -17,7 +17,6 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->mediumText('body');
-      //      $table->foreignId('book_category_id')->constrained('books_category');
 
             $table->softDeletes();
             $table->timestamps();

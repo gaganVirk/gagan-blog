@@ -15,9 +15,7 @@ class Book extends Model
 
     protected $fillable = [
         'title',
-        'cover_image',
         'body',
-        'book_category_id'
     ];
 
     public function searchableAs()
