@@ -28,15 +28,15 @@
                         {{ __('Projects') }}
                     </x-jet-nav-link>
         
-                    @auth
-                        <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
-                            {{ __('Create Post') }}
-                        </x-jet-nav-link>
+                @auth 
+                    <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
+                        {{ __('Create Post') }}
+                    </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('books.book-review') }}" :active="request()->routeIs('books.book-review')">
-                            {{ __('Book Review') }}
-                        </x-jet-nav-link>
-                    @endauth
+                    <x-jet-nav-link href="{{ route('books.book-review') }}" :active="request()->routeIs('books.book-review')">
+                        {{ __('Book Review') }}
+                    </x-jet-nav-link>
+                @endauth 
                     
                     
 

@@ -55,9 +55,11 @@ Route::get('/', function () {
  Route::resource('books', BooksController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
-    Route::get('/create-post', [PostsController::class, 'create'])->name('posts.create-post');
+    // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
+    Route::get('/create-post', [PostsController::class, 'create'])->name('posts.create-post');
 
+    // create book review and image upload
     Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
     Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
 });

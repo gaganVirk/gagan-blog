@@ -16,7 +16,6 @@ class PostsController extends Controller
         $posts = $category->posts;
         $users = DB::table('posts', '>', 100)->paginate('2');
 
-
         return view('posts.index')->with([
             'posts' => $posts,
             'users' => $users
@@ -24,7 +23,6 @@ class PostsController extends Controller
     }
 
     public function uploadImage(Request $request) {
-        dd('test');
         $file = $request->file('upload');
 
         $path = $file->store('yolo', 'public');

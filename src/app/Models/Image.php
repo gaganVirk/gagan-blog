@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Image extends Model
 {
     use HasFactory;
-    protected $table = 'posts';
+    protected $table = 'images';
 
     protected $fillable = [ 
-        'images'
+        'upload_image'
     ];
 }

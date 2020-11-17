@@ -28,7 +28,7 @@ services:
     image: linuxserver/mariadb:latest
     restart: unless-stopped
     volumes: 
-      - mariadb:/var/lib/mysql
+      - mariadb:/config
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}

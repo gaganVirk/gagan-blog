@@ -46,8 +46,10 @@ class BooksController extends Controller
     public function create()
     {
         $books = Book::all();
+        $users = Book::latest()->paginate(5);
         return view('books.book-review')->with([
-            'books' => $books
+            'books' => $books,
+            'users' => $users
         ]);
     }
 
