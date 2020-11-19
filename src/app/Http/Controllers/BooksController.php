@@ -13,7 +13,7 @@ class BooksController extends Controller
         $filename = $request->file('upload')->getClientOriginalName();
 
         $image = new BookImage();
-        $image->upload_image = $filename;
+        $image->image = $filename;
         $image->generated_name = $file->hashName();
         $image->path = url('storage/'.$path);
         $image->save();
@@ -29,11 +29,14 @@ class BooksController extends Controller
     public function index()
     {
         $books = Book::all();
+        $bookImage = new BookImage();
+        //dd($bookImage->image);
 
         $users = Book::latest()->paginate(5);
 
         return view('books.index')->with([
             'books' => $books,
+            'bookImage' => $bookImage,
             'users' => $users
         ]);
     }
@@ -95,7 +98,15 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-        //
+       // dd($request);
+        $book = Book::find($id);
+        $image = BookImage::find($id);
+
+
+        return view('books.show')->with([
+            'book' => $book,
+            'image' => $image
+        ]);
     }
 
     /**

@@ -9,5 +9,7 @@
         <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
     </section>
     <div class="px-4 py-4">{{ $post->body }}</div>
+    <a href="/edit-post/{{ $post->id}}" class="ml-4 px-4 border">Edit</a>
+    <a href="/delete-post/{{ $post->id}}" class="ml-4 px-4 border">Delete</a>
 
 @endsection

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookImageTable extends Migration
+class CreateBookImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateBookImageTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_image', function (Blueprint $table) {
+        Schema::create('book_images', function (Blueprint $table) {
             $table->id();
-            $table->string('upload_image');
+            $table->string('image');
             $table->string('generated_name');
             $table->string('path');
             $table->softDeletes();
@@ -30,6 +30,6 @@ class CreateBookImageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_image');
+        Schema::dropIfExists('book_images');
     }
 }

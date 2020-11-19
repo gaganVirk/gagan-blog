@@ -15,6 +15,10 @@
             @endforeach
         @else
             <p>No posts found</p>
+            <form action="{{ route('posts.restore') }}" method="get" enctype="multipart/form-data">
+                @csrf
+                <input type="button" value="submit" name="send"/>
+            </form>
         @endif
 
         {{ $users->links() }}

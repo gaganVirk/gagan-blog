@@ -22,10 +22,6 @@ use Illuminate\Support\Facades\Mail;
 | contains the "web" middleware group. Now create something great!
 |
 */
-/*
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome'); */
 
  // pages controller 
  Route::get('/', [PagesController::class, 'index'])->name('pages.index');
@@ -58,6 +54,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/create-post', [PostsController::class, 'create'])->name('posts.create-post');
+    Route::get('/edit-post/{id}', [PostsController::class, 'edit'])->name('posts.edit-post');
+    Route::get('/posts/restore', [PostsController::class, 'restore'])->name('posts.restore');
+
+    Route::get('/delete-post/{id}', [PostsController::class, 'destroy'])->name('posts.delete-post');
 
     // create book review and image upload
     Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');

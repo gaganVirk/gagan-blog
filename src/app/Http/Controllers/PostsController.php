@@ -11,6 +11,7 @@ use App\Models\Image;
 
 class PostsController extends Controller
 {
+
     public function filterByCategory(Category $category)
     {
         $posts = $category->posts;
@@ -29,7 +30,7 @@ class PostsController extends Controller
         $filename = $request->file('upload')->getClientOriginalName();
 
         $image = new Image();
-        $image->upload_image = $filename;
+        $image->image = $filename;
         $image->generated_name = $file->hashName();
         $image->path = url('storage/'.$path);
         $image->save();
@@ -109,7 +110,13 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        $image = Image::find($id);
+        
+        return view('posts.edit-post')->with([
+            'post' => $post,
+            'image' => $image
+        ]);
     }
 
     /**
@@ -121,7 +128,13 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+
+        $post->update($request->all());
+
+        return redirect()->route('posts.show',$post)->with([
+            'success' => 'Post Updated'
+        ]);
     }
 
     /**
@@ -132,6 +145,20 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete($id);
+
+        return redirect()->route('posts.show',$post);
+    }
+
+    /**
+     * Restore posts from database
+     * 
+     * @param int $id
+     * 
+     */
+    public function restore() {
+        dd('test');
+        return view('posts.index');
     }
 }

@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class BookImage extends Model
 {
     use HasFactory;
-    protected $table = 'book_image';
+    protected $table = 'book_images';
 
     protected $fillable = [ 
-        'upload_image'
+        'image',
+        'generated_name',
+        'path'
     ];
 }
