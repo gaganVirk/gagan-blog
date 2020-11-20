@@ -17,6 +17,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->mediumText('body');
+            $table->string('slug')->unique();
 
             $table->softDeletes();
             $table->timestamps();

@@ -16,23 +16,23 @@
     @endif
 </div> --}}
 
-    @if(count($books) > 0)
-    <div class="flex bg-white-200">
-        @foreach($books as $book)
-          <div class="flex-1 text-center px-8 py-4 m-8 bg-white-300">
-            <a class="text-xl" href="/books/{{$book->id}}">{{ $book->title }}</a>
-            <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
-            <p>{{ Str::limit($book->body, 20) }}</p>
-            <small>Written on {{ $book->created_at }}</small>
-          </div>
-        @endforeach
-    </div>
+@if(count($books) > 0)
+<div class="flex bg-white-200">
+    @foreach($books as $book)
+        <div class="flex-1 text-center px-8 py-4 m-8 bg-white-300">
+        <a class="text-xl" href="{{ route('posts.show',$book) }}">{{ $book->title }}</a>
+        <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
+        <p>{{ Str::limit($book->body, 20) }}</p>
+        <small>Written on {{ $book->created_at }}</small>
+        </div>
+    @endforeach
+</div>
 
-    @else
-          <p>No book reviews found</p>
-    @endif
+@else
+        <p>No book reviews found</p>
+@endif
 
-    {{ $users->links() }}
+{{ $users->links() }}
 
 @endsection
 

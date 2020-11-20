@@ -33,7 +33,7 @@
                         {{ __('Create Post') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('books.book-review') }}" :active="request()->routeIs('books.book-review')">
+                    <x-jet-nav-link href="{{ route('books.create') }}" :active="request()->routeIs('books.create')">
                         {{ __('Book Review') }}
                     </x-jet-nav-link>
                 @endauth 

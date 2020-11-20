@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
+use Illuminate\Support\Str;
 
 class PostsController extends Controller
 {
@@ -71,7 +72,7 @@ class PostsController extends Controller
     {
         $categories = Category::orderBy('categoryName')->get();
 
-        return view('posts.create-post')->with(compact('categories'));
+        return view('posts.create')->with(compact('categories'));
     }
 
     /**
@@ -87,6 +88,7 @@ class PostsController extends Controller
         $post->body = strip_tags($request->input('body'));
         
         $post->category_id = $request->input('category_id');
+        $post->slug = Str::of($post->title)->slug('-');
         $post->save();
         
         return redirect()->route('posts.index')->with('success', 'Post Created');

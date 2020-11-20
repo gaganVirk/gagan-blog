@@ -51,13 +51,12 @@ use Illuminate\Support\Facades\Mail;
  Route::resource('books', BooksController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
-    // TODO: refactor these routes
     // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
     // create book review and image upload
-    Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
+    //Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
     Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
 });
 

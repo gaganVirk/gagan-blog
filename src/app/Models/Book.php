@@ -18,7 +18,13 @@ class Book extends Model
     protected $fillable = [
         'title',
         'body',
+        'slug'
     ];
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function searchableAs()
     {

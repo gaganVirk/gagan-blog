@@ -3,14 +3,13 @@ namespace App\Http\Controllers;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Support\Str;
 
 class BooksController extends Controller
 {
     public function uploadBookImage(Request $request) {
-        dd($request);
 
         $file = $request->file('upload');
-
         $path = $file->store('avatars', 'public');
         $filename = $request->file('upload')->getClientOriginalName();
 
@@ -32,7 +31,6 @@ class BooksController extends Controller
     {
         $books = Book::all();
         $image = new Image();
-        //dd($bookImage->image);
 
         $users = Book::latest()->paginate(25);
 
@@ -51,7 +49,8 @@ class BooksController extends Controller
     public function create()
     {
         $books = Book::all();
-        $users = Book::latest()->paginate(5);
+        $users = Book::latest()->paginate(15);
+
         return view('books.book-review')->with([
             'books' => $books,
             'users' => $users
@@ -69,7 +68,8 @@ class BooksController extends Controller
         $book = new Book();
         $book->title = $request->input('title');
         $book->body = strip_tags($request->input('body'));
-        
+        $book->slug = Str::slug($book->title);
+    
         $book->save();
         
         return redirect()->route('books.index')->with('success', 'Book Review Created');

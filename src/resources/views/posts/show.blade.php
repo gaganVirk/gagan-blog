@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <a href="/posts" class="ml-4 px-4 border">Go Back</a>
+<a href="{{ route('posts.index') }}" class="ml-4 px-4 border">Go Back</a>
     <section class="hero container max-w-screen-lg mx-auto pb-10">
         <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
     </section>
