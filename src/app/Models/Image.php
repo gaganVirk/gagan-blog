@@ -12,4 +12,14 @@ class Image extends Model
     protected $fillable = [ 
         'upload_image'
     ];
+
+    public function posts()
+    {
+        return $this->belongsToMany(Post::class);
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany(Book::class);
+    }
 }

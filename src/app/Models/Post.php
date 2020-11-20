@@ -19,6 +19,11 @@ class Post extends Model
         'body',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function searchableAs()
     {
         return 'posts_index';
@@ -27,5 +32,10 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class);
     }
 }

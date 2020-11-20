@@ -35,7 +35,10 @@ class PostsController extends Controller
         $image->path = url('storage/'.$path);
         $image->save();
 
-        return ['url' => url('storage/'.$path)];
+        return [
+            'url' => url('storage/'.$path),
+            'image_id' => $image->id,
+        ];
     }
 
     /**
@@ -45,12 +48,16 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $post = Post::all();
+        if (auth()->check()) {
+            $posts = Post::withTrashed()->get();
+        } else {
+            $posts = Post::all();
+        }
         
         $users = Post::latest()->paginate(5);
 
         return view('posts.index')->with([
-            'posts' => $post,
+            'posts' => $posts,
             'users' => $users
         ]);
     }
@@ -91,14 +98,13 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        $image = Image::find($id);
+    public function show(Post $post)
+    {  
+        $image = Image::find($post->id);
 
         return view('posts.show')->with([
             'post' => $post,
-            'image' => $image
+            'image' => $image,
         ]);
     }
 
@@ -143,22 +149,23 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
-        $post->delete($id);
+        $post->delete();
 
-        return redirect()->route('posts.show',$post);
+        return redirect()->route('posts.index');
     }
 
     /**
      * Restore posts from database
      * 
-     * @param int $id
-     * 
      */
-    public function restore() {
-        dd('test');
-        return view('posts.index');
+    public function restore($slug)
+    {
+        $post = Post::withTrashed()->where('slug', $slug)->first();
+
+        $post->restore();
+
+        return redirect()->route('posts.show', $post);
     }
 }

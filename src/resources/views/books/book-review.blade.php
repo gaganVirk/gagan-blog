@@ -2,6 +2,8 @@
 
 @section('title', 'Book Review')
 
+@trixassets
+
 @section('content')
 
 <form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
@@ -17,12 +19,17 @@
         <p class="text-red-500 text-xs italic">{{ $errors->first('body') }}</p>
     </div>
 
+    {{-- <div class="px-4 mt-8 form-group">
+        <trix-editor input="body" name="body" value="{{ old('body') }}"></trix-editor>
+    </div> --}}
+
     <div class="text-center">
         <input class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit" name="send" value="Submit"> 
     </div>
+    <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
     
 </form>
-<script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
+
 
 <script>
     ClassicEditor

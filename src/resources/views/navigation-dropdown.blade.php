@@ -29,7 +29,7 @@
                     </x-jet-nav-link>
         
                 @auth 
-                    <x-jet-nav-link href="{{ route('posts.create-post') }}" :active="request()->routeIs('posts.create-post')">
+                    <x-jet-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
                         {{ __('Create Post') }}
                     </x-jet-nav-link>
 

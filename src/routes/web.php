@@ -37,12 +37,12 @@ use Illuminate\Support\Facades\Mail;
  Route::post('/contact/send', [PagesController::class, 'sendingEmail'])->name('pages.sendingEmail');
 
  // Certifications routes
- Route::resource('certifications', CertificationsController::class);
  Route::post('/upload-certificate', [CertificationsController::class, 'certUpload'])->name('certifications.upload-certs');
+ Route::resource('certifications', CertificationsController::class);
 
  // Posts page
- Route::resource('posts', PostsController::class);
  Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
+ Route::resource('posts', PostsController::class);
 
  // Projects page
  Route::get('/projects', [PagesController::class, 'project'])->name('pages.project');
@@ -51,13 +51,10 @@ use Illuminate\Support\Facades\Mail;
  Route::resource('books', BooksController::class);
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+    // TODO: refactor these routes
     // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
-    Route::get('/create-post', [PostsController::class, 'create'])->name('posts.create-post');
-    Route::get('/edit-post/{id}', [PostsController::class, 'edit'])->name('posts.edit-post');
-    Route::get('/posts/restore', [PostsController::class, 'restore'])->name('posts.restore');
-
-    Route::get('/delete-post/{id}', [PostsController::class, 'destroy'])->name('posts.delete-post');
+    Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
     // create book review and image upload
     Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');

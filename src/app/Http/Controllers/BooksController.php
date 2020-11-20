@@ -1,18 +1,20 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\BookImage;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Book;
 
 class BooksController extends Controller
 {
     public function uploadBookImage(Request $request) {
+        dd($request);
+
         $file = $request->file('upload');
 
         $path = $file->store('avatars', 'public');
         $filename = $request->file('upload')->getClientOriginalName();
 
-        $image = new BookImage();
+        $image = new Image();
         $image->image = $filename;
         $image->generated_name = $file->hashName();
         $image->path = url('storage/'.$path);
@@ -29,14 +31,14 @@ class BooksController extends Controller
     public function index()
     {
         $books = Book::all();
-        $bookImage = new BookImage();
+        $image = new Image();
         //dd($bookImage->image);
 
-        $users = Book::latest()->paginate(5);
+        $users = Book::latest()->paginate(25);
 
         return view('books.index')->with([
             'books' => $books,
-            'bookImage' => $bookImage,
+            'image' => $image,
             'users' => $users
         ]);
     }
@@ -82,7 +84,7 @@ class BooksController extends Controller
     public function show($id)
     {
         $book = Book::find($id);
-        $image = BookImage::find($id);
+        $image = Image::find($id);
 
         return view('books.show')->with([
             'book' => $book,
@@ -100,7 +102,7 @@ class BooksController extends Controller
     {
        // dd($request);
         $book = Book::find($id);
-        $image = BookImage::find($id);
+        $image = Image::find($id);
 
 
         return view('books.show')->with([

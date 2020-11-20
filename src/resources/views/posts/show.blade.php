@@ -9,7 +9,11 @@
         <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
     </section>
     <div class="px-4 py-4">{{ $post->body }}</div>
-    <a href="/edit-post/{{ $post->id}}" class="ml-4 px-4 border">Edit</a>
-    <a href="/delete-post/{{ $post->id}}" class="ml-4 px-4 border">Delete</a>
+    <a href="{{ route('posts.edit', $post) }}" class="ml-4 px-4 border">Edit</a>
+    <form action="{{ route('posts.destroy', $post) }}" method="post">
+        @csrf
+        @method('DELETE')
+        <input type="submit" class="ml-4 px-4 bg-red border" value="Delete">
+    </form>
 
 @endsection
