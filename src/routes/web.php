@@ -56,8 +56,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function() {
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
     // create book review and image upload
+    Route::post('upload', [BooksController::class, 'upload'])->name('books.upload-bookImage');
     //Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
-    Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
+    // Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
 });
 
 

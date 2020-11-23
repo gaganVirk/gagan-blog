@@ -7,19 +7,34 @@ use Illuminate\Support\Str;
 
 class BooksController extends Controller
 {
-    public function uploadBookImage(Request $request) {
+    public function upload(Request $request) {
+        $file = $request->file('file');
 
-        $file = $request->file('upload');
-        $path = $file->store('avatars', 'public');
-        $filename = $request->file('upload')->getClientOriginalName();
-
+        //get filename with extension
+        $filenamewithextension = $request->file('file')->getClientOriginalName();
+    
+        //get filename without extension
+        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+        //get file extension
+        $extension = $request->file('file')->getClientOriginalExtension();
+    
+        //filename to store
+        $filenametostore = $filename.'_'.time().'.'.$extension;
+    
+        //Upload File
+        $request->file('file')->storeAs('public/uploads', $filenametostore);
+    
+        // you can save image path below in database
+        $path = asset('storage/uploads/'.$filenametostore);
+    
         $image = new Image();
         $image->image = $filename;
         $image->generated_name = $file->hashName();
-        $image->path = url('storage/'.$path);
+        $image->path = $path;
         $image->save();
-
-        return ['url' => url('storage/'.$path)];
+    
+        echo $path; 
     }
 
     /**
@@ -27,10 +42,9 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Book $books)
     {
-        $books = Book::all();
-        $image = new Image();
+        $image = Image::find($books->id);
 
         $users = Book::latest()->paginate(25);
 
@@ -51,7 +65,7 @@ class BooksController extends Controller
         $books = Book::all();
         $users = Book::latest()->paginate(15);
 
-        return view('books.book-review')->with([
+        return view('books.create')->with([
             'books' => $books,
             'users' => $users
         ]);
@@ -67,7 +81,7 @@ class BooksController extends Controller
     {
         $book = new Book();
         $book->title = $request->input('title');
-        $book->body = strip_tags($request->input('body'));
+        $book->body = strip_tags($request->input('content'));
         $book->slug = Str::slug($book->title);
     
         $book->save();
@@ -81,10 +95,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        $book = Book::find($id);
-        $image = Image::find($id);
+        $image = Image::find($book->id);
 
         return view('books.show')->with([
             'book' => $book,
@@ -100,7 +113,6 @@ class BooksController extends Controller
      */
     public function edit($id)
     {
-       // dd($request);
         $book = Book::find($id);
         $image = Image::find($id);
 
