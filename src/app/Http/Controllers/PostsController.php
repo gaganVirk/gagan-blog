@@ -36,9 +36,13 @@ class PostsController extends Controller
         $image->path = url('storage/'.$path);
         $image->save();
 
+        // Store this image in a session.
+        $images = session()->has('images') ? session()->get('images') : [];
+        $images[] = $image->id;
+        session()->put('images', $images);
+
         return [
-            'url' => url('storage/'.$path),
-            'image_id' => $image->id,
+            'url' => url('storage/'.$path)
         ];
     }
 
@@ -72,6 +76,9 @@ class PostsController extends Controller
     {
         $categories = Category::orderBy('categoryName')->get();
 
+        // Clear the session.
+        session()->put('images', []);
+
         return view('posts.create')->with(compact('categories'));
     }
 
@@ -90,6 +97,15 @@ class PostsController extends Controller
         $post->category_id = $request->input('category_id');
         $post->slug = Str::of($post->title)->slug('-');
         $post->save();
+
+        foreach (session()->get('images') as $imageId) {
+            $image = Image::find($imageId);
+
+            $post->images()->attach($image);
+        }
+
+        // Clear the session.
+        session()->put('images', []);
         
         return redirect()->route('posts.index')->with('success', 'Post Created');
     }

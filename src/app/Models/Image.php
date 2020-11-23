@@ -10,7 +10,10 @@ class Image extends Model
     use HasFactory;
 
     protected $fillable = [ 
-        'upload_image'
+        'image',
+        'generate_name',
+        'path'
+
     ];
 
     public function posts()

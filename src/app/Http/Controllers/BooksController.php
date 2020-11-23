@@ -42,15 +42,14 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Book $books)
+    public function index()
     {
-        $image = Image::find($books->id);
+        $books = Book::all();
 
         $users = Book::latest()->paginate(25);
 
         return view('books.index')->with([
             'books' => $books,
-            'image' => $image,
             'users' => $users
         ]);
     }
