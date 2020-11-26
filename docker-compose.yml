@@ -24,6 +24,7 @@ services:
       - ./src:/var/www/html
       - ~/.composer:/.composer
     user: 1000:1000
+
   mariadb:
     image: linuxserver/mariadb:latest
     restart: unless-stopped
@@ -35,9 +36,16 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
+  redis:
+    build: ./dockerfiles/redis/
+    volumes:
+      - redis:/data
+    command: "redis-server /usr/local/etc/redis/redis.conf"
+
 networks:
   web:
     external: true
 
 volumes:
   mariadb:
+  redis:
