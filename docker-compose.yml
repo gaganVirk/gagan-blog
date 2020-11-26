@@ -17,6 +17,7 @@ services:
       - "traefik.http.routers.audit-secured.rule=Host(`${DOMAIN_NAME}`)"
       - "traefik.http.routers.audit-secured.entrypoints=web-secured"
       - "traefik.http.routers.audit-secured.tls=true"
+      - "traefik.http.routers.audit-secured.tls.certresolver=gagantlschallenge"
   php-fpm:
     build: ./dockerfiles/php-fpm/
     restart: unless-stopped
