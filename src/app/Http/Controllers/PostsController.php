@@ -8,7 +8,9 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -53,11 +55,15 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->check()) {
-            $posts = Post::withTrashed()->get();
-        } else {
-            $posts = Post::all();
-        }
+        // if (auth()->check()) {
+        //     $posts = Post::withTrashed()->with('category', 'images')->get();
+        // } else {
+        //     $posts = Post::with('category', 'images')->get();
+        // }
+
+        $posts = Cache::rememberForever('posts.index', function () {
+            return Post::withTrashed()->with('category', 'images')->get();
+        });
         
         $users = Post::latest()->paginate(5);
 
@@ -88,8 +94,9 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBlogPost $request)
+    public function store(StoreBlogPost $request, User $user)
     {
+        $user->with('create post');
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = strip_tags($request->input('body'));
@@ -102,10 +109,10 @@ class PostsController extends Controller
             $image = Image::find($imageId);
 
             $post->images()->attach($image);
+            // Clear the session.
+            session()->put('images', []);
         }
-
-        // Clear the session.
-        session()->put('images', []);
+        
         
         return redirect()->route('posts.index')->with('success', 'Post Created');
     }
@@ -132,14 +139,14 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::find($id);
-        $image = Image::find($id);
+        //$post = Post::find($id);
+        //$image = Image::find($id);
         
         return view('posts.edit-post')->with([
             'post' => $post,
-            'image' => $image
+            //'image' => $image
         ]);
     }
 

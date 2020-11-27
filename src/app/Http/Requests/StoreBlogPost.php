@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\User;
 
 class StoreBlogPost extends FormRequest
 {
@@ -11,8 +12,10 @@ class StoreBlogPost extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(User $user)
     {
+        return $user->hasPermissionTo('CRUD posts');
+
         // if (auth()->user()->roles->has('admin') {
         //     // User is admin therefore can edit
         //         return true;
@@ -20,11 +23,8 @@ class StoreBlogPost extends FormRequest
         //     // User owns this post, so can edit
         //     return true;
         // }
-
         // None of the conditions above were met.
         //return false;
-
-        return true;
     }
 
     /**

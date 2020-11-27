@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <a href="/posts/{{ $post->id }}" class="ml-4 px-4 border">Go Back</a>
+<a href="{{ route('posts.show', $post) }}" class="ml-4 px-4 border">Go Back</a>
     <form method="post" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
         @method('PUT')
         @csrf

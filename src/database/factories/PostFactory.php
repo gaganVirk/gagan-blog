@@ -24,10 +24,10 @@ class PostFactory extends Factory
     {
         static $number = 1;
         return [
-            'title' => $this->faker->word,
-            'body' => $this->faker->sentence(50),
-            'category_id' => $number,
-            'slug' => $this->faker->slug
+            // 'title' => $this->faker->word,
+            // 'body' => $this->faker->sentence(50),
+            // 'category_id' => $number,
+            // 'slug' => $this->faker->slug
         ];
     }
 

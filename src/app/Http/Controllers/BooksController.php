@@ -35,6 +35,11 @@ class BooksController extends Controller
         $image->save();
     
         echo $path; 
+
+        // Store this image in a session.
+        $images = session()->has('images') ? session()->get('images') : [];
+        $images[] = $image->id;
+        session()->put('images', $images);
     }
 
     /**
@@ -84,6 +89,14 @@ class BooksController extends Controller
         $book->slug = Str::slug($book->title);
     
         $book->save();
+
+        foreach (session()->get('images') as $imageId) {
+            $image = Image::find($imageId);
+
+            $book->images()->attach($image);
+            // Clear the session.
+            session()->put('images', []);
+        }
         
         return redirect()->route('books.index')->with('success', 'Book Review Created');
     }

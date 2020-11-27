@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\Mail;
  // Books page
  Route::resource('books', BooksController::class);
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+Route::middleware(['auth:sanctum', 'verified',])->group(function() {
     // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');

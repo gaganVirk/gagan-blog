@@ -52,7 +52,7 @@ class CategoriesController extends Controller
 
         Category::create($request->all());
 
-        return redirect()->route('posts.create-post');
+        return redirect()->route('posts.create');
     }
 
     /**

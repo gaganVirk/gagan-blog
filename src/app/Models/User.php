@@ -10,9 +10,11 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
+    use HasRoles;
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
@@ -20,11 +22,14 @@ class User extends Authenticatable
     use TwoFactorAuthenticatable;
     use Searchable;
 
+    protected $guard_name = 'web';
+
      /**
      * Get the value used to index the model.
      *
      * @return mixed
      */
+    
     public function getScoutKey()
     {
         return $this->email;
