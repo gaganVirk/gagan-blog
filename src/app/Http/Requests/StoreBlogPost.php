@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
+use Auth;
+//use Illuminate\Support\Facades\Auth;
 
 class StoreBlogPost extends FormRequest
 {
@@ -14,7 +16,10 @@ class StoreBlogPost extends FormRequest
      */
     public function authorize(User $user)
     {
-        return $user->hasPermissionTo('CRUD posts');
+        // return $user->hasPermissionTo('CRUD posts');
+        
+        return Auth::user()->can('CRUD posts');
+        
 
         // if (auth()->user()->roles->has('admin') {
         //     // User is admin therefore can edit

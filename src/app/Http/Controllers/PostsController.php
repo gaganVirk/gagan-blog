@@ -96,7 +96,7 @@ class PostsController extends Controller
      */
     public function store(StoreBlogPost $request, User $user)
     {
-        $user->with('create post');
+        $user->with('CRUD posts');
         $post = new Post();
         $post->title = $request->input('title');
         $post->body = strip_tags($request->input('body'));

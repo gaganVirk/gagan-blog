@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
 
         // Create a role (admin)
          $user->assignRole('admin');
+         $user->hasPermissionTo('CRUD posts');
 
         // Create a permission (create posts)
 
