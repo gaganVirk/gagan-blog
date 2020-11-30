@@ -34,10 +34,15 @@ class RolesTableSeeder extends Seeder
             'name' => 'CRUD books',
         ]);
 
+        $uploadCerts = Permission::create([
+            'name' => 'Upload certs'
+        ]);
+
         $role->givePermissionTo([
             $crudUsers,
             $crudPosts,
             $crudBooks,
+            $uploadCerts,
         ]);
     }
 }

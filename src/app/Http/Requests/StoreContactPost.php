@@ -27,7 +27,7 @@ class StoreContactPost extends FormRequest
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'email' => 'required',
-                'message' => 'required'
+                'content' => 'required'
             ];
     }
 }

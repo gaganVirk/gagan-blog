@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCertification;
 use Illuminate\Http\Request;
 use App\Models\Certification;
+use App\Models\User;
 
 class CertificationsController extends Controller
 {
-    public function certUpload(Request $req) {
-        $req->validate([
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,|max:2048'
-        ]);
-
+    public function certUpload(StoreCertification $req, User $user) {
+       
+        $user->with('Upload certs');
         $cert = new Certification();
 
-        if($req->file()) {
+        if($req->file() && $req->validated()) {
             $certName = $req->file->getClientOriginalName();
             $filePath = $req->file('file')->storeAs('uploads', $certName, 'public');
 

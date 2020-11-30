@@ -6,6 +6,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Book;
 use Illuminate\Support\Str;
+use App\Models\User;
 
 class BooksController extends Controller
 {
@@ -42,7 +43,6 @@ class BooksController extends Controller
         session()->put('images', $images);
     
         echo $path; 
-
     }
 
     /**
@@ -84,8 +84,9 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookPost $request)
+    public function store(StoreBookPost $request, User $user)
     {
+        $user->with('CRUD books');
         $book = new Book();
         $book->title = $request->input('title');
         $book->content = strip_tags($request->input('content'));

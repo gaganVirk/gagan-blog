@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class StoreBookPost extends FormRequest
 {
@@ -13,7 +14,7 @@ class StoreBookPost extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::user()->can('CRUD books');
     }
 
     /**

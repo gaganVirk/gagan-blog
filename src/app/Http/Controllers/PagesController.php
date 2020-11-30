@@ -46,4 +46,28 @@ class PagesController extends Controller
     public function project() {
         return view('pages.project');
     }
+
+    public function upload(Request $request) {
+        $file = $request->file('file');
+
+        //get filename with extension
+        $filenamewithextension = $file->getClientOriginalName();
+    
+        //get filename without extension
+        $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+        //get file extension
+        $extension = $file->getClientOriginalExtension();
+    
+        //filename to store
+        $filenametostore = $filename.'_'.time().'.'.$extension;
+    
+        //Upload File
+        $request->file('file')->storeAs('public/contact-uploads', $filenametostore);
+    
+        // you can save image path below in database
+        $path = asset('storage/uploads/'.$filenametostore);
+    
+        echo $path; 
+    }
 }

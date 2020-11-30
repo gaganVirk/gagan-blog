@@ -14,13 +14,12 @@ class StoreBlogPost extends FormRequest
      *
      * @return bool
      */
-    public function authorize(User $user)
+    public function authorize()
     {
         // return $user->hasPermissionTo('CRUD posts');
         
         return Auth::user()->can('CRUD posts');
         
-
         // if (auth()->user()->roles->has('admin') {
         //     // User is admin therefore can edit
         //         return true;

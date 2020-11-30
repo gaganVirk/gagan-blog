@@ -15,6 +15,7 @@
    <hr/>
   <div class="flex content-end flex-wrap">
     <form action="{{route('certifications.upload-certs')}}" method="post" enctype="multipart/form-data">
+      <p class="text-red-500 text-xs italic">{{ $errors->first('filepath') }}</p>
       <h3 class="text-xl text-center">Upload certificates</h3>
     @csrf
       <div class="bg-white-200">

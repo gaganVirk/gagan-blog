@@ -30,14 +30,13 @@
         <p class="text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
 
       </div>
-      <div class="px-4">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 font-semibold" for="grid-password">
-          Message
-        </label>
-        <textarea id="body" class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none" id="message" name="message" value="{{ old('message') }}"></textarea>
-        <p class="text-red-500 text-xs italic">{{ $errors->first('message') }}</p>
-
+      
+      <div class="px-4 mt-8 form-group justify-center">
+        <input id="x" type="hidden" name="content" value="" />
+        <trix-editor input="x"></trix-editor>
+        <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
       </div>
+
       <div class="text-center">
       <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit">
           Send
@@ -46,14 +45,73 @@
   </form>
 </div>
 
-<link href='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/js/froala_editor.pkgd.min.js'></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/froala-editor@3.2.0/css/froala_editor.css">
-
+<script src="{{ asset('js/trix.js') }}"></script>
 <script>
-new FroalaEditor('#body', {
-    pluginsEnabled: ['image', 'link']
-  });
+    (function() {
+        
+    var HOST = "{{ route('pages.upload') }}"; //pass the route
+
+    addEventListener("trix-attachment-add", function(event) {
+        if (event.attachment.file) {
+            uploadFileAttachment(event.attachment)
+        }
+    })
+  
+    function uploadFileAttachment(attachment) {
+        uploadFile(attachment.file, setProgress, setAttributes)
+  
+        function setProgress(progress) {
+            attachment.setUploadProgress(progress)
+        }
+  
+        function setAttributes(attributes) {
+            attachment.setAttributes(attributes)
+        }
+    }
+  
+    function uploadFile(file, progressCallback, successCallback) {
+        var formData = createFormData(file);
+        var xhr = new XMLHttpRequest();
+         
+        xhr.open("POST", HOST, true);
+        xhr.setRequestHeader( 'X-CSRF-TOKEN', getMeta( 'csrf-token' ) );
+  
+        xhr.upload.addEventListener("progress", function(event) {
+            var progress = event.loaded / event.total * 100
+            progressCallback(progress)
+        })
+  
+        xhr.addEventListener("load", function(event) {
+            var attributes = {
+                url: xhr.responseText,
+                href: xhr.responseText + "?content-disposition=attachment"
+            }
+            successCallback(attributes)
+        })
+        xhr.send(formData)
+    }
+
+    function createFormData(file) {
+        var data = new FormData()
+        data.append("Content-Type", file.type)
+        data.append("file", file)
+        return data
+    }
+
+    function getMeta(metaName) {
+        const metas = document.getElementsByTagName('meta');
+       
+        for (let i = 0; i < metas.length; i++) {
+          if (metas[i].getAttribute('name') === metaName) {
+            return metas[i].getAttribute('content');
+          }
+        }
+       
+        return '';
+      }
+  
+})();
+     
 </script>
 
 @endsection
