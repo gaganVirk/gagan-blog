@@ -3,9 +3,9 @@
 @section('title', 'Certifications')
 @section('content')
     
-    <div class="flex bg-white-200">
+    <div class="px-4 flex flex-wrap bg-white-200">
         @foreach($certs as $cert)
-          <div class="flex-1 text-center px-8 py-4 m-8 bg-white-300">
+          <div class="flex-1 bg-white-300">
             <embed src="{{ $cert->filepath }}#toolbar=1" alt="Certs" height="600" width="400"/>
           </div>
         @endforeach
@@ -13,7 +13,7 @@
    
    <div class="">
    <hr/>
-  <div class="flex content-end flex-wrap">
+  <div class="flex flex-wrap px-4">
     <form action="{{route('certifications.upload-certs')}}" method="post" enctype="multipart/form-data">
       <p class="text-red-500 text-xs italic">{{ $errors->first('filepath') }}</p>
       <h3 class="text-xl text-center">Upload certificates</h3>

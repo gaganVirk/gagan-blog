@@ -16,7 +16,7 @@ class CertificationsController extends Controller
 
         if($req->file() && $req->validated()) {
             $certName = $req->file->getClientOriginalName();
-            $filePath = $req->file('file')->storeAs('uploads', $certName, 'public');
+            $filePath = $req->file('file')->storeAs('uploadedCert', $certName, 'public');
 
             $cert->name = $req->file->getClientOriginalName();
             $cert->filepath = '/storage/' . $filePath;
