@@ -15,7 +15,7 @@ class Book extends Model
 
     protected $fillable = [
         'title',
-        'body',
+        'content',
         'slug'
     ];
 
@@ -29,12 +29,8 @@ class Book extends Model
         return 'books_index';
     }
 
-    public function bookCategory() {
-        return $this->belongsTo(BookCategory::class);
-    }
-
     public function images()
     {
-        return $this->belongsToMany(Image::class);
+        return $this->belongsToMany(Image::class, 'book_images');
     }
 }

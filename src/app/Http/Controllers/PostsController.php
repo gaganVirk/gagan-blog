@@ -102,7 +102,7 @@ class PostsController extends Controller
         $post->body = strip_tags($request->input('body'));
         
         $post->category_id = $request->input('category_id');
-        $post->slug = Str::of($post->title)->slug('-');
+        $post->slug = Str::slug($post->title);
         $post->save();
 
         foreach (session()->get('images') as $imageId) {

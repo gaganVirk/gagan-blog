@@ -1,12 +1,12 @@
 <?php
 
 use App\Models\Image;
-use App\Models\Post;
+use App\Models\Book;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagePostTable extends Migration
+class CreateBookImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,11 @@ class CreateImagePostTable extends Migration
      */
     public function up()
     {
-        Schema::create('image_post', function (Blueprint $table) {
+        Schema::create('book_images', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Image::class)->constrained();
-            $table->foreignIdFor(Post::class)->constrained();
+            $table->foreignIdFor(Book::class)->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateImagePostTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('image_post');
+        Schema::dropIfExists('book_images');
     }
 }

@@ -5,7 +5,7 @@
 @section('content')
 
 <form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
-    {{ csrf_field() }}
+    @csrf
 
     <div class="px-4 form-group justify-center">
     <input type="text" class="px-4 form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{{ old('title') }}">
@@ -15,7 +15,8 @@
     <div class="px-4 mt-8 form-group justify-center">
         <input id="x" type="hidden" name="content" value="" />
         <trix-editor input="x"></trix-editor>
-        </div>
+        <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
+    </div>
 
     {{-- <div class="px-4 mt-8 form-group">
         <textarea class="px-4 form-textarea block w-full" name="body" id="body" value="{{ old('body') }}"></textarea>
@@ -98,11 +99,6 @@
   
 })();
      
-</script>
-
-
-<script>
-
 </script>
 
 @endsection

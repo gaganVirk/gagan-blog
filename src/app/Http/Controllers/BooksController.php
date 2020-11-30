@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreBookPost;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Book;
@@ -33,13 +35,14 @@ class BooksController extends Controller
         $image->generated_name = $file->hashName();
         $image->path = $path;
         $image->save();
-    
-        echo $path; 
 
         // Store this image in a session.
         $images = session()->has('images') ? session()->get('images') : [];
         $images[] = $image->id;
         session()->put('images', $images);
+    
+        echo $path; 
+
     }
 
     /**
@@ -81,11 +84,11 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBookPost $request)
     {
         $book = new Book();
         $book->title = $request->input('title');
-        $book->body = strip_tags($request->input('content'));
+        $book->content = strip_tags($request->input('content'));
         $book->slug = Str::slug($book->title);
     
         $book->save();
