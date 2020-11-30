@@ -37,6 +37,10 @@
         <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
       </div>
 
+      <div class=" px-4">
+        <div class="h-captcha" data-sitekey="1c03730a-b99a-407f-b5b8-35ee4dcc92ac"></div>
+      </div>
+
       <div class="text-center">
       <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit">
           Send

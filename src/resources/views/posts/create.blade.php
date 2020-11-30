@@ -3,6 +3,10 @@
 @section('title', 'Create Posts')
 
 @section('content')
+    @if(!Auth::user()->can('CRUD posts'))
+        You don't have permission to do this.
+    @endif
+
     <form class="px-4" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
