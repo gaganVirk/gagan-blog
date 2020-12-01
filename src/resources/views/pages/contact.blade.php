@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="flex flex-wrap justify-center">
-<form class="w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" method="POST" enctype="multipart/form-data">
+<form class="w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" id="contactToken" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="px-4 pr-8 mb-6 md:mb-0">
         <label class="block uppercase text-xs font-bold mb-2 font-semibold" for="grid-first-name">
@@ -38,11 +38,12 @@
       </div>
 
       <div class=" px-4">
-        <div class="h-captcha" data-sitekey="1c03730a-b99a-407f-b5b8-35ee4dcc92ac"></div>
+        <div class="h-captcha" data-sitekey="395fe76a-044f-4375-be36-ae77bd04e467"></div>
+        <p class="text-red-500 text-xs italic">{{ $errors->first('h-captcha-response') }}</p>
       </div>
 
       <div class="text-center">
-      <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit">
+      <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" name="send" type="submit">
           Send
       </button>
       </div>

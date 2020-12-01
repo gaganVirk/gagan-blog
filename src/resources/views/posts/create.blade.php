@@ -4,7 +4,7 @@
 
 @section('content')
     @if(!Auth::user()->can('CRUD posts'))
-        You don't have permission to do this.
+        <p>You don't have permission to do this.</p>
     @endif
 
     <form class="px-4" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">

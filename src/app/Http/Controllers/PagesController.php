@@ -17,8 +17,8 @@ class PagesController extends Controller
         return view('pages.contact');
     }
 
-    public function sendingEmail(StoreContactPost $request) {
-        
+    public function sendingEmail(StoreContactPost $request)
+    {
         $to_email = config('mail.to.address');
 
         Mail::to($to_email)

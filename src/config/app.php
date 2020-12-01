@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'hcaptcha' => env('HCAPTCHA_SECRET'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
