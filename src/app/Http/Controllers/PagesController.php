@@ -26,11 +26,9 @@ class PagesController extends Controller
             ->send(new ContactMail($request));
        
         if(Mail::failures() != 0) {
-            return "<p> Success! Your E-mail has been sent.</p>";
+            return redirect('pages.index');
         }
-        else {
-            return "<p> Failed! Your E-mail has not sent.</p>";
-        } 
+        
         return view('pages.contact');
     }
 

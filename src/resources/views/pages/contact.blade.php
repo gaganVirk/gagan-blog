@@ -5,29 +5,29 @@
 @section('content')
 
 <div class="w-full flex flex-wrap justify-center">
-<form class="w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" id="contactToken" method="POST" enctype="multipart/form-data">
+<form class="font-serif w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" id="contactToken" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="px-4 pr-8 mb-6 md:mb-0">
-        <label class="block uppercase text-xs font-bold mb-2 font-semibold" for="grid-first-name">
+        <label class="font-serif block uppercase text-xs font-bold mb-2 font-semibold" for="grid-first-name">
           First Name
         </label>
         <input class="appearance-none block w-full bg-white-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Gagan" name="firstName" value="{{ old('firstName') }}">
-        <p class="text-red-500 text-xs italic">{{ $errors->first('firstName') }}</p>
+        <p class="font-serif text-red-500 text-xs italic">{{ $errors->first('firstName') }}</p>
     </div>
    
     <div class="px-4 pr-8 mb-6 md:mb-0">
-        <label class="block uppercase text-xs font-bold mb-2 font-semibold" for="grid-last-name">
+        <label class="font-serif block uppercase text-xs font-bold mb-2 font-semibold" for="grid-last-name">
           Last Name 
         </label>
         <input class="appearance-none block w-full bg-white-200  border rounded py-3 px-4 focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" type="text" placeholder="Virk" name="lastName" value="{{ old('lastName') }}">
-        <p class="text-red-500 text-xs italic">{{ $errors->first('lastName') }}</p>
+        <p class="font-serif text-red-500 text-xs italic">{{ $errors->first('lastName') }}</p>
     </div>
-      <div class=" px-4">
+      <div class="px-4">
         <label class="uppercase tracking-wide text-xs font-bold mb-2 font-semibold" for="grid-password">
           E-mail
         </label>
         <input class="appearance-none block w-full border border-gray-200 rounded py-3 px-4 mb-3" id="email" type="email" name="email" value="{{ old('email') }}">
-        <p class="text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
+        <p class="font-serif text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
       </div>
       
       <div class="px-4 mt-8 form-group justify-center">

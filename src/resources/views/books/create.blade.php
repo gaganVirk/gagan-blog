@@ -1,5 +1,4 @@
 @extends('layouts.wrapper')
-
 @section('title', 'Book Review')
 
 @section('content')
@@ -18,18 +17,8 @@
         <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
     </div>
 
-    {{-- <div class="px-4 mt-8 form-group">
-        <textarea class="px-4 form-textarea block w-full" name="body" id="body" value="{{ old('body') }}"></textarea>
-        <p class="text-red-500 text-xs italic">{{ $errors->first('body') }}</p>
-    </div> --}}
-
-
-    {{-- <div class="px-4 mt-8 form-group">
-        <trix-editor input="body" name="body" value="{{ old('body') }}"></trix-editor>
-    </div> --}}
-
     <div class="text-center">
-        <input class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit" name="send" value="Submit"> 
+        <input class="h-10 px-5 m-2 text-pink-100 transition-colors duration-150 bg-pink-600 rounded-lg focus:shadow-outline hover:bg-pink-700" type="submit" name="send" value="Submit"> 
     </div>
 </form>
 <script src="{{ asset('js/trix.js') }}"></script>

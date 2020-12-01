@@ -141,8 +141,6 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //$post = Post::find($id);
-        //$image = Image::find($id);
         
         return view('posts.edit-post')->with([
             'post' => $post,

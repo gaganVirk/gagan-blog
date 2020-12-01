@@ -21,7 +21,7 @@
         <link rel="stylesheet" href="{{ asset('/css/trix.css') }}">
         <script src="https://hcaptcha.com/1/api.js" async defer></script>    
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-serif antialiased">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
             
