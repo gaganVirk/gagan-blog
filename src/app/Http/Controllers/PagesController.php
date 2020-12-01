@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\StoreContactPost;
 use App\Mail\OrderShipped;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -37,9 +38,11 @@ class PagesController extends Controller
         $posts = Post::all();
 
         $posts = Post::orderBy('created_at', 'desc')->take(2)->get();
+        $books = Book::orderBy('created_at', 'desc')->take(2)->get();
 
         return view('pages.index')->with([
-            'posts' => $posts
+            'posts' => $posts,
+            'books' => $books,
         ]);
     }
 

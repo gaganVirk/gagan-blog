@@ -2,7 +2,7 @@
       <img class="rounded-full h-36 w-36" href="https://github.com/gaganVirk" src="{{ 'storage/images/github.png' }}" alt="Github"/>
       Copyright {{ date('Y') }}
     </div> --}}
-<div class="bg-blue-500 bg-opacity-75 md:bg-opacity-50 flex justify-center">
+<div class="bg-white-200 flex justify-center">
 
    <a class="px-2" href="https://github.com/gaganVirk">
     <img class="h-10 w-10" src="{{ 'storage/images/github.png' }}" alt="Gagan"/>

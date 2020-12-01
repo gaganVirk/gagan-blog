@@ -30,9 +30,7 @@ class StoreContactPost extends FormRequest
                 'email' => 'required',
                 'content' => 'required',
                 'h-captcha-response' => 'required',
-            ];
-
-            
+            ];      
     }
 
     public function withValidator($validator)

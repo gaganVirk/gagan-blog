@@ -124,6 +124,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'hcaptcha' => env('HCAPTCHA_SECRET'),
+    'client_hcaptcha' => env('HCAPTCHA_CLIENT_SECRET'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,16 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    theme: {
-        objectPosition: {
-          center: 'center',
-        },
     purge: [
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
 
     theme: {
         extend: {

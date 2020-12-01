@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="flex flex-wrap justify-center">
+<div class="w-full flex flex-wrap justify-center">
 <form class="w-full max-w-lg pt-5" action="{{ route('pages.sendingEmail') }}" id="contactToken" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="px-4 pr-8 mb-6 md:mb-0">
@@ -28,7 +28,6 @@
         </label>
         <input class="appearance-none block w-full border border-gray-200 rounded py-3 px-4 mb-3" id="email" type="email" name="email" value="{{ old('email') }}">
         <p class="text-red-500 text-xs italic">{{ $errors->first('email') }}</p>
-
       </div>
       
       <div class="px-4 mt-8 form-group justify-center">
@@ -37,13 +36,13 @@
         <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
       </div>
 
-      <div class=" px-4">
-        <div class="h-captcha" data-sitekey="395fe76a-044f-4375-be36-ae77bd04e467"></div>
+      <div class="mt-2 px-4">
+      <div class="h-captcha" data-sitekey="{{ config('app.client_hcaptcha') }}"></div>
         <p class="text-red-500 text-xs italic">{{ $errors->first('h-captcha-response') }}</p>
       </div>
 
       <div class="text-center">
-      <button class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" name="send" type="submit">
+      <button class="h-10 px-5 m-2 text-blue-100 transition-colors duration-150 bg-blue-600 rounded-lg focus:shadow-outline hover:bg-blue-700" name="send" type="submit">
           Send
       </button>
       </div>

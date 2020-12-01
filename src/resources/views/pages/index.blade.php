@@ -4,12 +4,12 @@
 @section('content')
 
 <div class="flex flex-wrap mt-2">
-    <div class="w-full md:w-3/4 p-4 rounded-full flex items-center justify-center">            
-        <img class="rounded-full h-36 w-36" src="{{ 'storage/images/gagan.png' }}" alt="Gagan"/>
+    <div class="w-full md:w-2/4 p-4 rounded-full flex items-center justify-center">            
+        <img class="rounded-full h-66 w-66" src="{{ 'storage/images/gagan.png' }}" alt="Gagan"/>
 
     </div>
 
-    <div class="w-full md:w-1/4 bg-gray-400 p-4 text-center text-gray-700">
+    <div class="w-full md:w-2/4 bg-gray-400 p-4 text-center text-gray-200">
         <h3 class="mt-1 text-xl text-center">About me</h3>
         <p class="mt-2">
         He is the author of the multi-volume work The Art of Computer Programming. He contributed to the development of the 
@@ -21,9 +21,9 @@
 </div>
 
 <div class="flex flex-wrap mt-8">
-    <div class="w-full md:w-3/4 bg-gray-500 px-4 text-gray-200">
+    <div class="w-full md:w-2/4 bg-gray-500 px-4 text-gray-200">
         <h3 class="text-xl">Latest posts</h3>
-        <div class="grid grid-rows-auto grid-flow-col">
+        <div class="grid grid-rows-auto">
         @if(count($posts) > 1) 
             @foreach($posts as $post)
                 <a href="/posts/{{$post->id}}"><h1>{{ $post->title }}</h1></a>
@@ -34,11 +34,18 @@
         @endif
         </div>  
     </div>
-    <div class="w-full md:w-1/4 bg-gray-400 p-4 text-center text-gray-700">
-        <h3 class="text-xl">Recent Projects</h3>
-        Edward Vladimirovich Frenkel is a Russian-American mathematician working in representation theory, algebraic geometry, 
-        and mathematical physics. He is a professor of mathematics at University of California, Berkeley, member of the 
-        American Academy of Arts and Sciences, and author of the bestselling book Love and Math.
+    <div class="w-full md:w-2/4 bg-gray-400 px-4 text-gray-200">
+        <h3 class="text-xl">Latest Book Reviews</h3>
+        <div class="grid grid-rows-auto">
+        @if(count($books) > 1) 
+            @foreach($books as $book)
+                <a href="/books/{{$book->slug}}"><h1>{{ $book->title }}</h1></a>
+                <p>{{ Str::limit($book->content, 100) }}</p>
+            @endforeach
+        @else
+            <p class="text-left">No Book Reviews Found! </p>
+        @endif
+        </div>  
     </div>
 </div>
 @endsection

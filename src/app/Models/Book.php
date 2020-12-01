@@ -31,6 +31,6 @@ class Book extends Model
 
     public function images()
     {
-        return $this->belongsToMany(Image::class, 'book_images');
+        return $this->belongsToMany(Image::class);
     }
 }

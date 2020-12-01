@@ -38,6 +38,6 @@ class Post extends Model
 
     public function images()
     {
-        return $this->belongsToMany(Image::class, 'post_images');
+        return $this->belongsToMany(Image::class);
     }
 }
