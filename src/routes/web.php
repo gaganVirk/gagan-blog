@@ -52,6 +52,8 @@ use Illuminate\Support\Facades\Mail;
 
 Route::middleware(['auth:sanctum', 'verified',])->group(function() {
     // create posts and image upload
+    Route::get('posts/create', [PostsController::class, 'create'])->name('posts.create');
+    Route::get('posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit-post');
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 

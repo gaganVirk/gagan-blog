@@ -22,5 +22,4 @@
         </form>
     </div>
 @endrole
-
 @endsection

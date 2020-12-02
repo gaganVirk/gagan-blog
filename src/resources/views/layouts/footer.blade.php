@@ -5,11 +5,11 @@
 <div class="bg-white-200 flex justify-center">
 
    <a class="px-2" href="https://github.com/gaganVirk">
-    <img class="h-10 w-10" src="{{ 'storage/images/github.png' }}" alt="Gagan"/>
+    <img class="h-10 w-10" src="{{ asset('storage/images/github.png') }}" alt="Gagan"/>
    </a>
 
     <a class="px-2" href="https://twitter.com/Gagan0711">
-      <img class="text-xl h-10 w-10" src="{{ 'storage/images/twitter.png' }}" alt="Gagan"/>
+      <img class="text-xl h-10 w-10" src="{{ asset('storage/images/twitter.png') }}" alt="Gagan"/>
     </a>
     <p class="mt-1 text-xl text-right">@ {{ date('Y') }}</p>
        

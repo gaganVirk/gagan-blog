@@ -38,8 +38,6 @@
                     </x-jet-nav-link>
                 @endrole
                     
-                    
-
                     <x-jet-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
                         {{ __('Contact') }}
                     </x-jet-nav-link>

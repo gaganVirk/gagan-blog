@@ -3,10 +3,7 @@
 @section('title', 'Create Posts')
 
 @section('content')
-    @if(!Auth::user()->can('CRUD posts'))
-        <p>You don't have permission to do this.</p>
-    @endif
-
+    <div class="flex">
     <form class="px-4" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
@@ -20,7 +17,7 @@
 
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
-        <div class="px-4 mt-4  form-group mt-1">
+        <div class="px-4 form-group">
             <select class="border p-2" name="category_id" id="category_id" >
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
@@ -28,6 +25,7 @@
                     @endforeach
             </select>
             <input class="border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit" name="send" value="Manage"/>
+    </div>
             <p class="text-red-500 text-xs italic">{{ $errors->first('category_id') }}</p>
         </div>
 

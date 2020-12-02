@@ -11,6 +11,8 @@ use App\Models\User;
 class BooksController extends Controller
 {
     public function upload(Request $request) {
+        $this->authorize('upload', Book::class);
+
         $file = $request->file('file');
 
         //get filename with extension
@@ -69,6 +71,7 @@ class BooksController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Book::class);
         $books = Book::all();
         $users = Book::latest()->paginate(15);
 
@@ -86,6 +89,7 @@ class BooksController extends Controller
      */
     public function store(StoreBookPost $request, User $user)
     {
+        $this->authorize('store', Book::class);
         $user->with('CRUD books');
         $book = new Book();
         $book->title = $request->input('title');
@@ -111,7 +115,7 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Book $book, User $user)
     {
         $image = Image::find($book->id);
 
@@ -127,15 +131,12 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Book $book)
     {
-        $book = Book::find($id);
-        $image = Image::find($id);
+        $this->authorize('edit', $book);
 
-
-        return view('books.show')->with([
+        return view('books.edit')->with([
             'book' => $book,
-            'image' => $image
         ]);
     }
 
@@ -146,9 +147,16 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        //
+        $this->authorize('update', $book);
+
+        $book->update($request->all());
+
+        return redirect()->route('books.show')->with([
+            'book' => $book,
+            'success' => 'Book Post Updated',
+        ]);
     }
 
     /**
@@ -157,8 +165,22 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        //
+        $this->authorize('delete', $book);
+        $book->delete();
+        return redirect()->route('books.index');
+    }
+
+    /**
+     * Restore book posts from database
+     */
+    public function restore($slug) {
+        $this->authorize('restore', Book::class);
+
+        $book = Book::withTrashed()->where('slug', $slug)->first();
+        $book->restore();
+
+        return redirect()->route('books.index', $book);
     }
 }

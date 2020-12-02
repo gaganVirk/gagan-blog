@@ -4,7 +4,7 @@
 
 @section('content')
 
-<a href="{{ route('posts.show', $post) }}" class="ml-4 px-4 border">Go Back</a>
+<a href="{{ route('posts.show', $post) }}" class="ml-2 bg-gray-600 text-gray-100 text-sm rounded hover:bg-gray-500 px-3 py-3 focus:outline-none">Go Back</a>
     <form method="post" action="{{ route('posts.update', $post->id) }}" enctype="multipart/form-data">
         @method('PUT')
         @csrf
@@ -22,7 +22,7 @@
         </div>
 
         <div class="text-center">
-            <input class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit" name="send" value="Submit"> 
+            <input class="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" type="submit" name="send" value="Submit">  
         </div>
         
     </form>
