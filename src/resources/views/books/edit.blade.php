@@ -56,20 +56,20 @@
             progressCallback(progress)
         })
   
-        xhr.addEventListener("load", function(event) {
-            var attributes = {
-                url: xhr.responseText,
-                href: xhr.responseText + "?content-disposition=attachment"
-            }
-            successCallback(attributes)
-        })
-        xhr.send(formData)
+        // xhr.addEventListener("load", function(event) {
+        //     var attributes = {
+        //         url: xhr.responseText,
+        //         href: xhr.responseText + "?content-disposition=attachment"
+        //     }
+        //     successCallback(attributes)
+        // })
+        // xhr.send(formData)
     }
 
     function createFormData(file) {
         var data = new FormData()
-        data.append("Content-Type", file.type)
-        data.append("file", file)
+       data.append("Content-Type", file.type)
+       data.append("file", file)
         return data
     }
 

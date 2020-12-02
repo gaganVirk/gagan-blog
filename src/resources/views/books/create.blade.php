@@ -57,13 +57,13 @@
             progressCallback(progress)
         })
   
-        xhr.addEventListener("load", function(event) {
-            var attributes = {
-                url: xhr.responseText,
-                href: xhr.responseText + "?content-disposition=attachment"
-            }
-            successCallback(attributes)
-        })
+        // xhr.addEventListener("load", function(event) {
+        //     var attributes = {
+        //         url: xhr.responseText,
+        //         href: xhr.responseText + "?content-disposition=attachment"
+        //     }
+        //     successCallback(attributes)
+        // })
         xhr.send(formData)
     }
 
@@ -71,7 +71,6 @@
         var data = new FormData()
         data.append("Content-Type", file.type)
         data.append("file", file)
-        console.log(data);
         return data
     }
 
