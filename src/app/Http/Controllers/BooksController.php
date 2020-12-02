@@ -95,7 +95,6 @@ class BooksController extends Controller
         $book->title = $request->input('title');
         $book->content = strip_tags($request->input('content'));
         $book->slug = Str::slug($book->title);
-    
         $book->save();
 
         foreach (session()->get('images') as $imageId) {
@@ -105,7 +104,6 @@ class BooksController extends Controller
             // Clear the session.
             session()->put('images', []);
         }
-        
         return redirect()->route('books.index')->with('success', 'Book Review Created');
     }
 
@@ -147,8 +145,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
+        $book = Book::find($id);
+
         $this->authorize('update', $book);
 
         $book->update($request->all());

@@ -41,8 +41,8 @@ use Illuminate\Support\Facades\Mail;
  Route::resource('certifications', CertificationsController::class);
 
  // Posts page
- Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
  Route::resource('posts', PostsController::class);
+ Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
 
  // Projects page
  Route::get('/projects', [PagesController::class, 'project'])->name('pages.project');
@@ -52,8 +52,6 @@ use Illuminate\Support\Facades\Mail;
 
 Route::middleware(['auth:sanctum', 'verified',])->group(function() {
     // create posts and image upload
-    Route::get('posts/create', [PostsController::class, 'create'])->name('posts.create');
-    Route::get('posts/{slug}/edit', [PostsController::class, 'edit'])->name('posts.edit-post');
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
@@ -62,7 +60,6 @@ Route::middleware(['auth:sanctum', 'verified',])->group(function() {
 
     // Certifications routes
     Route::post('/upload-certificate', [CertificationsController::class, 'certUpload'])->name('certifications.upload-certs');
-    
 });
 
 

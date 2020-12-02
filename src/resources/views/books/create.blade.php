@@ -71,6 +71,7 @@
         var data = new FormData()
         data.append("Content-Type", file.type)
         data.append("file", file)
+        console.log(data);
         return data
     }
 

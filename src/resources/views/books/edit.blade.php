@@ -4,18 +4,16 @@
 
 @section('content')
 
-<form method="post" action="{{ route('books.store') }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('books.update', $book) }}" enctype="multipart/form-data">
     @csrf
-
+    @method('PUT')
     <div class="px-4 form-group justify-center">
-    <input type="text" class="px-4 form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{!! old('title') !!}">
-    <p class="text-red-500 text-xs italic">{{ $errors->first('title') }}</p>
+    <input type="text" class="px-4 form-input mt-1 block mr-8 w-full"name="title" id="title" placeholder="Title" value="{!! old('title', $book->title) !!}">
     </div>
 
     <div class="px-4 mt-8 form-group justify-center">
-        <input id="x" type="hidden" name="content" value="" />
+        <input id="x" type="hidden" name="content" value="{!! old('content', $book->content) !!}" />
         <trix-editor input="x"></trix-editor>
-        <p class="text-red-500 text-xs italic">{{ $errors->first('content') }}</p>
     </div>
 
     <div class="text-center">
