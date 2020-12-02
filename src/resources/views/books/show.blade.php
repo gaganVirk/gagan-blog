@@ -7,7 +7,7 @@
 <a class="ml-2 bg-gray-600 text-gray-100 text-sm rounded hover:bg-gray-500 px-3 py-3 focus:outline-none" href="{{ route('books.index') }}">Go Back</a>
 <section class="hero container max-w-screen-lg mx-auto pb-10">
     @foreach($book->images as $image)
-        <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
+        <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" height="200" width="200"/>
     @endforeach
 </section>
 

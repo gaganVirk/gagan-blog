@@ -3,17 +3,17 @@
 @section('title', 'Certifications')
 @section('content')
     
-    <div class="px-4 flex flex-wrap bg-white-200">
+    <div class="my-4 grid grid-cols-3 gap-4 mb-8">
         @foreach($certs as $cert)
-          <div class="flex-1 bg-white-300">
-            <embed src="{{ $cert->filepath }}#toolbar=1" alt="Certs" height="600" width="400"/>
+          <div class="text-center">
+            <embed class="m-auto" src="{{ $cert->filepath }}#toolbar=1" alt="Certs" height="350" width="350"/>
           </div>
         @endforeach
     </div>
-   
-   <div class="">
-   <hr/>
-  <div class="flex flex-wrap px-4">
+    <hr/>
+
+  @can('admin')
+  <div class="flex flex-wrap px-4 mt-8">
     <form action="{{route('certifications.upload-certs')}}" method="post" enctype="multipart/form-data">
       <p class="text-red-500 text-xs italic">{{ $errors->first('filepath') }}</p>
       <h3 class="font-serif text-xl text-center">Upload certificates</h3>
@@ -26,6 +26,6 @@
       </div>
       </form>
   </div>
-  </div>
+  @endcan
 
 @endsection
