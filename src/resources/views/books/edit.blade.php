@@ -12,13 +12,14 @@
     </div>
 
     <div class="px-4 mt-8 form-group justify-center">
-        <input id="x" type="hidden" name="content" value="{!! old('content', $book->content) !!}" />
+        <input id="x" value="{!! old('content', $book->content) !!}" type="hidden" name="content"/>
         <trix-editor input="x"></trix-editor>
     </div>
 
     <div class="text-center">
         <input class="h-10 px-5 m-2 text-pink-100 transition-colors duration-150 bg-pink-600 rounded-lg focus:shadow-outline hover:bg-pink-700" type="submit" name="send" value="Submit"> 
     </div>
+    
 </form>
 <script src="{{ asset('js/trix.js') }}"></script>
 <script>

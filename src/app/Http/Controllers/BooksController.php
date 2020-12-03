@@ -145,18 +145,13 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Book $book)
     {
-        $book = Book::find($id);
-
         $this->authorize('update', $book);
 
         $book->update($request->all());
 
-        return redirect()->route('books.show')->with([
-            'book' => $book,
-            'success' => 'Book Post Updated',
-        ]);
+        return redirect()->route('books.show', $book);
     }
 
     /**

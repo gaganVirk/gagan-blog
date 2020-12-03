@@ -21,16 +21,16 @@
         <link rel="stylesheet" href="{{ asset('/css/trix.css') }}">
         <script src="https://hcaptcha.com/1/api.js" async defer></script>    
     </head>
-    <body class="font-serif antialiased">
-        <div class="min-h-screen bg-gray-100">
+    <body class="min-h-screen font-serif antialiased bg-gray-100">
+        <div class="bg-gray-100">
             @livewire('navigation-dropdown')
             
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+            <footer>@include('layouts.footer')</footer>
         </div>
-        <footer class="">@include('layouts.footer')</footer>
         @stack('modals')
 
         @livewireScripts
