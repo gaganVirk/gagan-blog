@@ -12,11 +12,10 @@
     <div class="w-full md:w-2/4 bg-gray-400 p-4 text-center text-gray-200">
         <h3 class="mt-1 text-xl text-center">About me</h3>
         <p class="font-serif mt-2">
-        He is the author of the multi-volume work The Art of Computer Programming. He contributed to the development of the 
-        rigorous analysis of the computational complexity of algorithms and systematized formal mathematical techniques for it. 
-        In the process he also popularized the asymptotic notation. In addition to fundamental contributions in several branches 
-        of theoretical computer science, Knuth is the creator of the TeX computer typesetting system, the related METAFONT font 
-        definition language and rendering system, and the Computer Modern family of typefaces.</p>   
+            Today, we can teach ourselves anything online today with basic internet connection and a micro-processor, 
+            and this idea of teaching yourself something on your own is a passion of mine. It is actually called Autodidacticism.
+             I am teaching myself to program from the last four years. I have a keen interest in Laravel, C#.NET and Java. 
+             I sign up lot of online courses and read technical blogs to learn new skills.</p>   
     </div>
 </div>
 
