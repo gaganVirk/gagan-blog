@@ -19,8 +19,9 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="{{ asset('/css/trix.css') }}">
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>    
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-serif antialiased">
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-dropdown')
             
@@ -29,7 +30,7 @@
                 {{ $slot }}
             </main>
         </div>
-        <footer>@include('layouts.footer')</footer>
+        <footer class="">@include('layouts.footer')</footer>
         @stack('modals')
 
         @livewireScripts

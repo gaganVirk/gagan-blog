@@ -12,6 +12,7 @@ class Post extends Model
     use HasFactory;
     use SoftDeletes;
     use Searchable;
+    protected $guard_name = 'CRUD posts';
 
     protected $fillable = [
         'category_id',

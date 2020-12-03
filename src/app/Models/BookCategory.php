@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class BookCategory extends Model
 {
-    use HasFactory;
-    protected $table = 'books_category';
+    // use HasFactory;
+    // protected $table = 'books_category';
 
-    protected $fillable = [
-        'categoryName'
-    ];
+    // protected $fillable = [
+    //     'categoryName'
+    // ];
 
-    public function books() {
-        return $this->hasMany(Book::class);
-    }
+    // public function books() {
+    //     return $this->hasMany(Book::class);
+    // }
 }

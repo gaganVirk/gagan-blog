@@ -3,12 +3,13 @@
 @section('title', 'Create Posts')
 
 @section('content')
+    <div class="flex">
     <form class="px-4" method="post" action="{{ route('categories.store') }}" enctype="multipart/form-data">
         @csrf
         <div>
             <input type="text" class="form-input" name="categoryName" id="categoryName" placeholder="Create New Category" value="{{ old('categoryName') }}">
             
-            <input class="px-4 ml-4 border text-xl rounded" type="submit" name="send" value="Save"/>
+            <input class="border border-teal-500 bg-teal-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-teal-600 focus:outline-none focus:shadow-outline" type="submit" name="send" value="Save"/>
 
             <p class="text-red-500 text-xs italic">{{ $errors->first('categoryName') }}</p>
         </div>
@@ -16,14 +17,15 @@
 
     <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
-        <div class="px-4 mt-4  form-group mt-1">
-            <select class="border m-8" name="category_id" id="category_id" >
+        <div class="px-4 form-group">
+            <select class="border p-2" name="category_id" id="category_id" >
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->categoryName }}</option>
                     @endforeach
             </select>
-            <input class="px-4 ml-4 text-xl border rounded" type="submit" name="send" value="Manage"/>
+            <input class="border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-gray-800 focus:outline-none focus:shadow-outline" type="submit" name="send" value="Manage"/>
+    </div>
             <p class="text-red-500 text-xs italic">{{ $errors->first('category_id') }}</p>
         </div>
 
@@ -38,7 +40,7 @@
         </div>
 
         <div class="text-center">
-            <input class="px-4 text-xl border mt-8 p-8 font-semibold text-xl" type="submit" name="send" value="Submit"> 
+            <input class="border border-green-500 bg-green-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-green-600 focus:outline-none focus:shadow-outline" type="submit" name="send" value="Submit"> 
         </div>
         
     </form>

@@ -28,7 +28,7 @@
                         {{ __('Projects') }}
                     </x-jet-nav-link>
         
-                @auth 
+                @role('admin')
                     <x-jet-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
                         {{ __('Create Post') }}
                     </x-jet-nav-link>
@@ -36,10 +36,8 @@
                     <x-jet-nav-link href="{{ route('books.create') }}" :active="request()->routeIs('books.create')">
                         {{ __('Book Review') }}
                     </x-jet-nav-link>
-                @endauth 
+                @endrole
                     
-                    
-
                     <x-jet-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
                         {{ __('Contact') }}
                     </x-jet-nav-link>

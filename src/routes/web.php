@@ -34,15 +34,15 @@ use Illuminate\Support\Facades\Mail;
 
  // Contact page
  Route::get('/contact', [PagesController::class, 'showContactForm'])->name('pages.contact');
+ Route::post('/contact/upload', [PagesController::class, 'upload'])->name('pages.upload');
  Route::post('/contact/send', [PagesController::class, 'sendingEmail'])->name('pages.sendingEmail');
 
  // Certifications routes
- Route::post('/upload-certificate', [CertificationsController::class, 'certUpload'])->name('certifications.upload-certs');
  Route::resource('certifications', CertificationsController::class);
 
  // Posts page
- Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
  Route::resource('posts', PostsController::class);
+ Route::get('/posts/category/{category}', [PostsController::class, 'filterByCategory'])->name('posts.filterByCategory');
 
  // Projects page
  Route::get('/projects', [PagesController::class, 'project'])->name('pages.project');
@@ -50,15 +50,16 @@ use Illuminate\Support\Facades\Mail;
  // Books page
  Route::resource('books', BooksController::class);
 
-Route::middleware(['auth:sanctum', 'verified'])->group(function() {
+Route::middleware(['auth:sanctum', 'verified',])->group(function() {
     // create posts and image upload
     Route::post('/upload-image', [PostsController::class, 'uploadImage'])->name('posts.upload-image');
     Route::get('/posts/{slug}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
     // create book review and image upload
     Route::post('upload', [BooksController::class, 'upload'])->name('books.upload-bookImage');
-    //Route::get('/book-review', [BooksController::class, 'create'])->name('books.book-review');
-    // Route::post('/upload-bookImage', [BooksController::class, 'uploadBookImage'])->name('books.upload-bookImage');
+
+    // Certifications routes
+    Route::post('/upload-certificate', [CertificationsController::class, 'certUpload'])->name('certifications.upload-certs');
 });
 
 

@@ -16,7 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->mediumText('body');
+            $table->mediumText('content');
             $table->string('slug')->unique();
 
             $table->softDeletes();

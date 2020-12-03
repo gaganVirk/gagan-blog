@@ -15,7 +15,7 @@ class Book extends Model
 
     protected $fillable = [
         'title',
-        'body',
+        'content',
         'slug'
     ];
 
@@ -27,10 +27,6 @@ class Book extends Model
     public function searchableAs()
     {
         return 'books_index';
-    }
-
-    public function bookCategory() {
-        return $this->belongsTo(BookCategory::class);
     }
 
     public function images()

@@ -45,14 +45,15 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'categoryName' => 'string|unique:categories,categoryName'
-        ]);
+        if(Auth::user()->can('CRUD posts')) {
+            $request->validate([
+                'categoryName' => 'string|unique:categories,categoryName'
+            ]);
 
+            Category::create($request->all());
+        }
 
-        Category::create($request->all());
-
-        return redirect()->route('posts.create-post');
+        return redirect()->route('posts.create');
     }
 
     /**

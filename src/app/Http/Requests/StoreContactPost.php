@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Http;
 
 class StoreContactPost extends FormRequest
 {
@@ -27,7 +28,22 @@ class StoreContactPost extends FormRequest
                 'firstName' => 'required',
                 'lastName' => 'required',
                 'email' => 'required',
-                'message' => 'required'
-            ];
+                'content' => 'required',
+                'h-captcha-response' => 'required',
+            ];      
+    }
+
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            $response = Http::asForm()->post('https://hcaptcha.com/siteverify', [
+                'response' => request()->get('h-captcha-response'),
+                'secret' => config('app.hcaptcha'),
+            ]);
+
+            if (!$response['success']) {
+                $validator->errors()->add('h-captcha-response', 'Something is wrong with your captcha answer!');
+            }
+        });
     }
 }

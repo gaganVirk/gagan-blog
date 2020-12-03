@@ -8,11 +8,15 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Policies\PostPolicy;
+use Illuminate\Auth\Access\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
-
     public function filterByCategory(Category $category)
     {
         $posts = $category->posts;
@@ -25,6 +29,9 @@ class PostsController extends Controller
     }
 
     public function uploadImage(Request $request) {
+
+        $this->authorize('uploadImage', Post::class);
+
         $file = $request->file('upload');
 
         $path = $file->store('yolo', 'public');
@@ -53,11 +60,9 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        if (auth()->check()) {
-            $posts = Post::withTrashed()->get();
-        } else {
-            $posts = Post::all();
-        }
+        $posts = Cache::rememberForever('posts.index', function () {
+            return Post::withTrashed()->with('category', 'images')->get();
+        });
         
         $users = Post::latest()->paginate(5);
 
@@ -74,6 +79,8 @@ class PostsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Post::class);
+
         $categories = Category::orderBy('categoryName')->get();
 
         // Clear the session.
@@ -88,25 +95,26 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBlogPost $request)
+    public function store(StoreBlogPost $request, User $user)
     {
+        $this->authorize('store', Post::class);
+
+        $user->with('CRUD posts');
         $post = new Post();
         $post->title = $request->input('title');
-        $post->body = strip_tags($request->input('body'));
+        $post->body = ($request->input('body'));
         
         $post->category_id = $request->input('category_id');
-        $post->slug = Str::of($post->title)->slug('-');
+        $post->slug = Str::slug($post->title);
         $post->save();
 
         foreach (session()->get('images') as $imageId) {
             $image = Image::find($imageId);
 
             $post->images()->attach($image);
+            // Clear the session.
+            session()->put('images', []);
         }
-
-        // Clear the session.
-        session()->put('images', []);
-        
         return redirect()->route('posts.index')->with('success', 'Post Created');
     }
 
@@ -132,14 +140,12 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post, User $user)
     {
-        $post = Post::find($id);
-        $image = Image::find($id);
-        
-        return view('posts.edit-post')->with([
+        $this->authorize('edit', $post);
+
+        return view('posts.edit')->with([
             'post' => $post,
-            'image' => $image
         ]);
     }
 
@@ -152,6 +158,8 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', Post::class);
+
         $post = Post::find($id);
 
         $post->update($request->all());
@@ -169,8 +177,10 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        $post->delete();
+        $this->authorize('delete', Post::class);
 
+        $post->delete();
+        
         return redirect()->route('posts.index');
     }
 
@@ -180,10 +190,11 @@ class PostsController extends Controller
      */
     public function restore($slug)
     {
+        $this->authorize('restore', Post::class);
+
         $post = Post::withTrashed()->where('slug', $slug)->first();
-
         $post->restore();
-
+        
         return redirect()->route('posts.show', $post);
     }
 }
