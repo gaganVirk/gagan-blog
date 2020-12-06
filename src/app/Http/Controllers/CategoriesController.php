@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -45,13 +46,13 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->can('CRUD posts')) {
-            $request->validate([
-                'categoryName' => 'string|unique:categories,categoryName'
-            ]);
+        $this->authorize('store', Category::class);
+        $request->validate([
+            'categoryName' => 'string|unique:categories,categoryName'
+        ]);
 
-            Category::create($request->all());
-        }
+        Category::create($request->all());
+    
 
         return redirect()->route('posts.create');
     }
