@@ -25,8 +25,8 @@
         <div class="font-serif grid grid-rows-auto">
         @if(count($posts) > 1) 
             @foreach($posts as $post)
-                <a href="/posts/{{$post->id}}"><h1>{{ $post->title }}</h1></a>
-                <p>{{ Str::limit($post->body, 100) }}</p>
+                <a href="{{ route('posts.show',$post) }}"><h1>{{ $post->title }}</h1></a>
+                <p>{!! Str::limit($post->body, 20) !!}</p>
             @endforeach
         @else
             <p class="font-serif text-left">No Posts Found! </p>
@@ -38,8 +38,8 @@
         <div class="font-serif grid grid-rows-auto">
         @if(count($books) > 1) 
             @foreach($books as $book)
-                <a href="/books/{{$book->slug}}"><h1>{{ $book->title }}</h1></a>
-                <p>{{ Str::limit($book->content, 100) }}</p>
+                <a href="{{ route('books.show', $book)}}"><h1>{{ $book->title }}</h1></a>
+                <p>{!! Str::limit($book->content, 20) !!}</p>
             @endforeach
         @else
             <p class="font-serif text-left">No Book Reviews Found! </p>
