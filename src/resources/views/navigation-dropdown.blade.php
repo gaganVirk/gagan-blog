@@ -188,6 +188,9 @@
             <x-jet-responsive-nav-link href="{{ route('pages.project') }}" :active="request()->routeIs('pages.project')">
                 {{ __('Projects') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('pages.contact') }}" :active="request()->routeIs('pages.contact')">
+                {{ __('Contact') }}
+            </x-jet-responsive-nav-link>
 
         @role('admin')
             <x-jet-responsive-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">

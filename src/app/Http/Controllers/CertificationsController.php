@@ -24,7 +24,7 @@ class CertificationsController extends Controller
 
             return redirect('/certifications')->with('success', 'File has been uploaded.')
                          ->with('file', $certName);
-        }
+        } 
     }
 
     /**
@@ -70,10 +70,11 @@ class CertificationsController extends Controller
      */
     public function show($id, Certification $cert)
     {
+        dd('test');
         $certs = Certification::find($id);
 
-        header("Content-type: application/pdf");
-        header("Content-length: " . filesize($cert->filepath));
+        // header("Content-type: application/pdf");
+        // header("Content-length: " . filesize($cert->filepath));
         readfile($cert->filepath);
 
         return view('/cetifications')->with([

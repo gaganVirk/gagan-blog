@@ -32,7 +32,7 @@ class StoreCertification extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:csv,txt,xlx,xls,pdf,|max:2048'
+            'file' => 'required|mimes:png,jpeg,bmp|max:2048'
         ];
     }
 

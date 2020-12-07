@@ -3,10 +3,11 @@
 @section('title', 'Certifications')
 @section('content')
     
-    <div class="grid grid-cols-3 gap-4 mb-8">
+    <div class="grid grid-cols-3 col-g gap-2 mb-8">
         @foreach($certs as $cert)
           <div>
-            <embed class="m-auto" src="{{ $cert->filepath }}#toolbar=1" alt="Certs" height="350" width="350"/>
+            <img class="m-auto" src="{{ $cert->filepath }}" tabindex="-1" alt="Certs" height="400" width="250">
+            </a>
           </div>
         @endforeach
     </div>
