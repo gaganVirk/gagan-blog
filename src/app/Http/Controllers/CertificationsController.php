@@ -70,7 +70,6 @@ class CertificationsController extends Controller
      */
     public function show($id, Certification $cert)
     {
-        dd('test');
         $certs = Certification::find($id);
 
         // header("Content-type: application/pdf");

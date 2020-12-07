@@ -44,7 +44,7 @@ class StoreCertification extends FormRequest
     public function messages()
     {
         return [
-            'file.required' => 'A title is required',
+            'file.required' => 'A file is required',
         ];
     }
 }
