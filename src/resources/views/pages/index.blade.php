@@ -26,7 +26,7 @@
         @if(count($posts) > 1) 
             @foreach($posts as $post)
                 <a href="{{ route('posts.show',$post) }}"><h1>{{ $post->title }}</h1></a>
-                <p>{!! Str::limit($post->body, 20) !!}</p>
+                <p>{!! Str::limit($post->body, 80) !!}</p>
             @endforeach
         @else
             <p class="font-serif text-left">No Posts Found! </p>
@@ -39,7 +39,7 @@
         @if(count($books) > 1) 
             @foreach($books as $book)
                 <a href="{{ route('books.show', $book)}}"><h1>{{ $book->title }}</h1></a>
-                <p>{!! Str::limit($book->content, 20) !!}</p>
+                <p>{!! Str::limit($book->content, 80) !!}</p>
             @endforeach
         @else
             <p class="font-serif text-left">No Book Reviews Found! </p>
