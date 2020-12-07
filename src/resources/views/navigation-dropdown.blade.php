@@ -176,6 +176,28 @@
             <x-jet-responsive-nav-link href="{{ route('pages.index') }}" :active="request()->routeIs('pages.index')">
                 {{ __('Home') }}
             </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('certifications.index') }}" :active="request()->routeIs('certifications.index')">
+                {{ __('Certifications') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
+                {{ __('Posts') }}
+            </x-jet-responsvie-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('books.index') }}" :active="request()->routeIs('books.index')">
+                {{ __('Books') }}
+            </x-jet-responsive-nav-link>
+            <x-jet-responsive-nav-link href="{{ route('pages.project') }}" :active="request()->routeIs('pages.project')">
+                {{ __('Projects') }}
+            </x-jet-responsive-nav-link>
+
+        @role('admin')
+            <x-jet-responsive-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
+                {{ __('Create Post') }}
+            </x-jet-responsive-nav-link>
+
+            <x-jet-responsive-nav-link href="{{ route('books.create') }}" :active="request()->routeIs('books.create')">
+                {{ __('Book Review') }}
+            </x-jet-responsive-nav-link>
+        @endrole
         </div>
 
         <!-- Responsive Settings Options -->

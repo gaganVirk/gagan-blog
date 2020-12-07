@@ -10,8 +10,8 @@
     Certifications
     </div>
 
-    <div class="flex bg-white-200">
-        <div class="flex-1 text-center px-4 py-2 m-2">
+    <div class="grid grid-cols-3 bg-white-200">
+        <div class="text-center px-4 py-2 m-2">
         <img src="{{ $certs->name }}" alt="pic"/>
         </div>
         <div class="flex-1 text-center px-4 py-2 m-2">
