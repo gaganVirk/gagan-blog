@@ -126,6 +126,9 @@ return [
     'hcaptcha' => env('HCAPTCHA_SECRET'),
     'client_hcaptcha' => env('HCAPTCHA_CLIENT_SECRET'),
 
+    // URL for the spaces
+    'url' => env('URL'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

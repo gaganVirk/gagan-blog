@@ -7,10 +7,10 @@
 <a href="{{ route('posts.index') }}" class="ml-2 bg-gray-600 text-gray-100 text-sm rounded hover:bg-gray-500 px-3 py-3 focus:outline-none">Go Back</a>
     <section class="hero container max-w-screen-lg mx-auto pb-10">
         @foreach($post->images as $image)
-            <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" >
+            <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" width="200" height="300" >
         @endforeach
     </section>
-    <div class="px-4"> {!! $post->body !!}</div>
+    <div class="m-auto text-center px-4"> {!! $post->body !!}</div>
     @role('admin')
     <div class="p-4 flex gap-2">
         <a href="{{ route('posts.edit', $post) }}" class="bg-blue-600 text-gray-200 rounded hover:bg-blue-500 px-4 py-2 focus:outline-none">Edit</a>

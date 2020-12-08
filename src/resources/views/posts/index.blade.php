@@ -9,7 +9,8 @@
             @foreach($posts as $post)
             <div class="text-center">
             <a class="text-xl" href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
-            <p>{!! Str::limit($post->body, 20) !!}</p>
+            <p>{!! Str::words($post->body,21,41) !!}</p>
+            <p></p>
             <small>Written on {{ $post->created_at }}</small>
             <p>Category: <a href="{{ route('posts.filterByCategory', $post->category) }}">{{ $post->category->categoryName }}</a></p>
             @if($post->deleted_at)
@@ -22,7 +23,7 @@
             <p>No posts found</p>
         @endif
 
-        {{ $users->links() }}
+         {{-- {{ $posts->links() }}  --}}
     </div>
 
 @endsection

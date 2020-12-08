@@ -1,15 +1,13 @@
 @extends('layouts.wrapper')
 
+<script src="{{ asset('js/cert.js') }}"></script>
 @section('title', 'Certifications')
 @section('content')
     
-    <div class="grid grid-cols-3 col-g gap-2 mb-8">
-        @foreach($certs as $cert)
-          <div>
-            <img class="m-auto" src="{{ $cert->filepath }}" alt="Certs" height="400" width="250">
-            </a>
-          </div>
-        @endforeach
+    <div class="grid grid-cols-2 md:grid-cols-3 col-g gap-2 sm:mb-4 md:mb-8 lg:mb-12">
+      @foreach($certs as $cert)
+        <img id="cert{{ $cert->id }}" onClick="reply_click()" class="m-auto" src="{{ $cert->filepath }}" alt="Certs" height="400" width="250">
+      @endforeach
     </div>
     <hr/>
 
