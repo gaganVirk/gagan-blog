@@ -88,7 +88,7 @@ class PostsController extends Controller
         $categories = Category::orderBy('categoryName')->get();
 
         // Clear the session.
-        // session()->put('images', []);
+        session()->put('images', []);
 
         return view('posts.create')->with(compact('categories'));
     }
@@ -110,6 +110,7 @@ class PostsController extends Controller
         
         $post->category_id = $request->input('category_id');
         $post->slug = Str::slug($post->title);
+        $post->created_at = $request->input('date');
         $post->save();
 
         foreach (session()->get('images') as $imageId) {
@@ -136,6 +137,7 @@ class PostsController extends Controller
             'post' => $post,
             'image' => $image,
         ]);
+
     }
 
     /**
