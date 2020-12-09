@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Policies\PostPolicy;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -31,16 +32,21 @@ class PostsController extends Controller
     public function uploadImage(Request $request) {
 
         $this->authorize('uploadImage', Post::class);
-
         $file = $request->file('upload');
 
-        $path = $file->store('yolo', 'public');
-        $filename = $request->file('upload')->getClientOriginalName();
+        $partialUrl = Storage::disk('s3')->put('posts', $file, 'public');
+
+       // $fullUrl = config('filesystems.disks.s3.endpoint') . '/' . $partialUrl;
+       $fullUrl = config('app.url') .'/'. $partialUrl;
+       
+        // $file = $request->file('upload');
+        // $path = $file->store('yolo', 'public');
+        // $filename = $request->file('upload')->getClientOriginalName();
 
         $image = new Image();
-        $image->image = $filename;
-        $image->generated_name = $file->hashName();
-        $image->path = url('storage/'.$path);
+        $image->image = $fullUrl;
+        $image->generated_name = $fullUrl;
+        $image->path = $fullUrl;
         $image->save();
 
         // Store this image in a session.
@@ -49,7 +55,8 @@ class PostsController extends Controller
         session()->put('images', $images);
 
         return [
-            'url' => url('storage/'.$path)
+            // 'url' => url('storage/'.$path)
+            'url' => $fullUrl,
         ];
     }
 
@@ -63,12 +70,9 @@ class PostsController extends Controller
         $posts = Cache::rememberForever('posts.index', function () {
             return Post::withTrashed()->with('category', 'images')->get();
         });
-        
-        $users = Post::latest()->paginate(5);
 
         return view('posts.index')->with([
             'posts' => $posts,
-            'users' => $users
         ]);
     }
 
@@ -84,7 +88,7 @@ class PostsController extends Controller
         $categories = Category::orderBy('categoryName')->get();
 
         // Clear the session.
-        session()->put('images', []);
+        // session()->put('images', []);
 
         return view('posts.create')->with(compact('categories'));
     }
@@ -126,7 +130,7 @@ class PostsController extends Controller
      */
     public function show(Post $post)
     {  
-        $image = Image::find($post->id);
+         $image = Image::find($post->id);
 
         return view('posts.show')->with([
             'post' => $post,

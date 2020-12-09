@@ -19,7 +19,8 @@
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.js" defer></script>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="{{ asset('/css/trix.css') }}">
-        <script src="https://hcaptcha.com/1/api.js" async defer></script>    
+        <script src="https://hcaptcha.com/1/api.js" async defer></script>  
+
     </head>
     <body class="min-h-screen font-serif antialiased bg-gray-100">
         <div class="bg-gray-100">

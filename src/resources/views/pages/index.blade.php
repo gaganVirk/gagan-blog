@@ -3,15 +3,15 @@
 @section('title', '')
 @section('content')
 
-<div class="flex flex-wrap mt-2">
-    <div class="w-full md:w-2/4 p-4 rounded-full flex items-center justify-center">            
-        <img class="rounded-full h-66 w-66" src="{{ 'storage/images/gagan.png' }}" alt="Gagan"/>
+<div class="grid grid-cols-2">
+    <div class="mt-4">            
+        <img class="m-auto rounded-full h-66 w-66" src="{{ 'storage/images/gagan.png' }}" alt="Gagan"/>
 
     </div>
 
-    <div class="w-full md:w-2/4 bg-gray-400 p-4 text-center text-gray-200">
-        <h3 class="mt-1 text-xl text-center">About me</h3>
-        <p class="font-serif mt-2">
+    <div class="bg-gray-400 px-4 text-gray-200">
+        <h3 class="mt-1 text-2xl text-center">About me</h3>
+        <p class="mt-2 text-xl">
             Today, we can teach ourselves anything online today with basic internet connection and a micro-processor, 
             and this idea of teaching yourself something on your own is a passion of mine. It is actually called Autodidacticism.
              I am teaching myself to program from the last four years. I have a keen interest in Laravel, C#.NET and Java. 
@@ -19,32 +19,28 @@
     </div>
 </div>
 
-<div class="flex flex-wrap mt-8">
-    <div class="font-serif w-full md:w-2/4 bg-gray-500 px-4 text-gray-200">
-        <h3 class="font-serif text-xl">Latest posts</h3>
-        <div class="font-serif grid grid-rows-auto">
+<div class="grid grid-cols-2 mt-8">
+    <div class="bg-gray-500 px-4 text-gray-200">
+        <h3 class="text-2xl">Latest posts</h3>
         @if(count($posts) > 1) 
             @foreach($posts as $post)
-                <a href="{{ route('posts.show',$post) }}"><h1 class="text-lg">{{ $post->title }}</h1></a>
-                <p class="text-sm">{!! Str::limit($post->body, 80) !!}</p>
+                <a href="{{ route('posts.show',$post) }}">{{ $post->title }}</a>
+                <p class="text-sm"></p>
             @endforeach
         @else
             <p class="font-serif text-left">No Posts Found! </p>
         @endif
-        </div>  
     </div>
-    <div class="w-full md:w-2/4 bg-gray-400 px-4 text-gray-200">
-        <h3 class="font-serif text-xl">Latest Book Reviews</h3>
-        <div class="font-serif grid grid-rows-auto">
+    <div class="bg-gray-400 px-4 text-gray-200">
+        <h3 class="text-2xl">Latest Book Reviews</h3>
         @if(count($books) > 1) 
             @foreach($books as $book)
                 <a href="{{ route('books.show', $book)}}"><h1 class="text-lg">{{ $book->title }}</h1></a>
                 <p class="text-sm">{!! Str::limit($book->content, 80) !!}</p>
             @endforeach
         @else
-            <p class="font-serif text-left">No Book Reviews Found! </p>
+            <p>No Book Reviews Found! </p>
         @endif
-        </div>  
     </div>
 </div>
 @endsection

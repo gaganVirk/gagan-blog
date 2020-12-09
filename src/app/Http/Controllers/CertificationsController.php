@@ -6,24 +6,33 @@ use App\Http\Requests\StoreCertification;
 use Illuminate\Http\Request;
 use App\Models\Certification;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class CertificationsController extends Controller
 {
-    public function certUpload(StoreCertification $req, User $user) {
+    public function certUpload(StoreCertification $request, User $user) {
        
         $user->with('Upload certs');
         $cert = new Certification();
 
-        if($req->file() && $req->validated()) {
-            $certName = $req->file->getClientOriginalName();
-            $filePath = $req->file('file')->storeAs('uploadedCert', $certName, 'public');
+        if($request->file() && $request->validated()) {
+            
+            $file = $request->file('file');
+            $partialUrl = Storage::disk('s3')->put('certifications', $file, 'public');
+            $fullUrl = config('app.url') .'/'. $partialUrl;
 
-            $cert->name = $req->file->getClientOriginalName();
-            $cert->filepath = '/storage/' . $filePath;
+            $cert->name = $file->getClientOriginalName();
+            $cert->filePath = $fullUrl;
             $cert->save();
+            // $certName = $request->file->getClientOriginalName();
+            // $filePath = $request->file('file')->storeAs('uploadedCert', $certName, 'public');
+
+            // $cert->name = $request->file->getClientOriginalName();
+            // $cert->filepath = '/storage/' . $filePath;
+            // $cert->save();
 
             return redirect('/certifications')->with('success', 'File has been uploaded.')
-                         ->with('file', $certName);
+                         ->with('file', $cert->name);
         } 
     }
 
@@ -68,15 +77,16 @@ class CertificationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Certification $cert)
+    public function show(Certification $certs)
     {
-        $certs = Certification::find($id);
+        //  $certs = Certification::find($id);
 
         // header("Content-type: application/pdf");
         // header("Content-length: " . filesize($cert->filepath));
-        readfile($cert->filepath);
+        // readfile($cert->filepath);
 
-        return view('/cetifications')->with([
+        $certs = Certification::all();
+        return view('certifications.show',$certs)->with([
             'certs' => $certs
         ]);
     }

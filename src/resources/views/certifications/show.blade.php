@@ -1,28 +1,37 @@
-<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+@extends('layouts.wrapper')
 
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Certifications') }}
-        </h2>
-    </x-slot>
-    <div class="text-center text-xl">
-    Certifications
+@section('title', 'Certifications')
+@section('content')
+
+{{-- swiper CDN --}}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Swiper -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach($certs as $cert)
+        <div class="swiper-slide">
+          <img class="m-auto" src="{{ $cert->filepath }}" alt="Certs" height="300" width="500">
+        </div>
+        @endforeach
     </div>
+    <!-- Add Arrows -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
 
-    <div class="grid grid-cols-3 bg-white-200">
-        <div class="text-center px-4 py-2 m-2">
-        <img src="{{ $certs->name }}" alt="pic"/>
-        </div>
-        <div class="flex-1 text-center px-4 py-2 m-2">
-          Medium length
-        </div>
-        <div class="flex-1 text-center px-4 py-2 m-2">
-          Significant
-        </div>
-    </div>
-    <div>
-   
-   
-
-</x-app-layout>
+ 
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+@endsection
