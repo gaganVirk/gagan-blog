@@ -7,16 +7,25 @@
     <div class="my-4 grid grid-cols-4 gap-4">
         @if(count($posts) > 0) 
             @foreach($posts as $post)
-            <div class="text-center">
-            <a class="text-xl" href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
-            <p>{!! Str::words($post->body,21,41) !!}</p>
-            <p></p>
-            <small>Written on {{ $post->created_at }}</small>
-            <p>Category: <a href="{{ route('posts.filterByCategory', $post->category) }}">{{ $post->category->categoryName }}</a></p>
+            @if($post->created_at <= date("Y-m-d H:i:s"))
+                <div class="text-center">
+                <a class="text-xl" href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
+                <p>{!! Str::limit($post->body,20) !!}</p>
+                <small>Written on {{ $post->created_at->format("Y-m-d") }}</small>
+                <p>Category: <a href="{{ route('posts.filterByCategory', $post->category) }}">{{ $post->category->categoryName }}</a></p>
+                <hr/>
+            @elseif($post->created_at > date("Y-m-d H:i:s"))
+                <div class="text-center">
+                <a class="text-xl">Publishing article</a>
+                <p>Coming soon!!</p>
+                <small>Incoming article {{ $post->created_at->format("Y-m-d") }}</small>
+                <p>Category: {{ $post->category->categoryName }}</p>
+                <hr/>
+            @endif
+                
             @if($post->deleted_at)
                 <a href="{{ route('posts.restore', $post->slug) }}">Restore</a>
             @endif
-            <hr/>
             </div>
             @endforeach
         @else
