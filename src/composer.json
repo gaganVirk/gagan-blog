@@ -19,7 +19,7 @@
         "laravel/scout": "^8.4",
         "laravel/tinker": "^2.0",
         "livewire/livewire": "^2.0",
-        "spatie/laravel-permission": "^3.17"
+        "spatie/laravel-permission": "^3.18"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
