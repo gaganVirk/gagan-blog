@@ -10,8 +10,8 @@
     </div>
 
     <div class="bg-gray-400 px-4 text-gray-200">
-        <h3 class="mt-1 text-2xl text-center">About me</h3>
-        <p class="mt-2 text-xl">
+        <h3 class="mt-2 text-2xl text-center">About me</h3>
+        <p class="mt-2 text-lg">
             Today, we can teach ourselves anything online today with basic internet connection and a micro-processor, 
             and this idea of teaching yourself something on your own is a passion of mine. It is actually called Autodidacticism.
              I am teaching myself to program from the last four years. I have a keen interest in Laravel, C#.NET and Java. 
@@ -25,7 +25,7 @@
         @if(count($posts) > 1) 
             @foreach($posts as $post)
                 <a href="{{ route('posts.show',$post) }}">{{ $post->title }}</a>
-                <p class="text-sm"></p>
+                <p class="text-sm">{!! Str::limit($post->body, 80) !!}</p>
             @endforeach
         @else
             <p class="font-serif text-left">No Posts Found! </p>
