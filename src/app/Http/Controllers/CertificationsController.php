@@ -77,15 +77,16 @@ class CertificationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id, Certification $cert)
+    public function show(Certification $certs)
     {
-        $certs = Certification::find($id);
+        //  $certs = Certification::find($id);
 
         // header("Content-type: application/pdf");
         // header("Content-length: " . filesize($cert->filepath));
-        readfile($cert->filepath);
+        // readfile($cert->filepath);
 
-        return view('/cetifications')->with([
+        $certs = Certification::all();
+        return view('certifications.show',$certs)->with([
             'certs' => $certs
         ]);
     }
