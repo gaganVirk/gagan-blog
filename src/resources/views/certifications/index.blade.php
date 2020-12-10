@@ -3,7 +3,7 @@
 @section('title', 'Certifications')
 @section('content')
     
-      <div class="modal-open grid grid-cols-2 md:grid-cols-3 col-g gap-2 sm:mb-4 md:mb-8 lg:mb-12">
+      <div class="grid grid-cols-2 md:grid-cols-3 col-g gap-2 sm:mb-4 md:mb-8 lg:mb-12">
         @foreach($certs as $cert)
         <a href="{{ route('certifications.show',$cert)}}">
           <img class="m-auto" src="{{ $cert->filepath }}" alt="Certs" height="400" width="250">

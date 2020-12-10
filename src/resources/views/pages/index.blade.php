@@ -24,7 +24,7 @@
         <h3 class="text-2xl">Latest posts</h3>
         @if(count($posts) > 1) 
             @foreach($posts as $post)
-                <a href="{{ route('posts.show',$post) }}">{{ $post->title }}</a>
+                <a class="text-lg" href="{{ route('posts.show',$post) }}">{{ $post->title }}</a>
                 <p class="text-sm">{!! Str::limit($post->body, 80) !!}</p>
             @endforeach
         @else
