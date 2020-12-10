@@ -28,14 +28,12 @@ class PagesController extends Controller
         if(Mail::failures() != 0) {
             return redirect('pages.index');
         }
-        
         return view('pages.contact');
     }
 
     public function index() {
         $posts = Post::all();
-
-        $posts = Post::orderBy('created_at', 'desc')->take(2)->get();
+        $posts = Post::orderBy('created_at', 'asc')->take(2)->get();
         $books = Book::orderBy('created_at', 'desc')->take(2)->get();
 
         return view('pages.index')->with([
