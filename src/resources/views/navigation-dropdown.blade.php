@@ -192,7 +192,7 @@
                 {{ __('Contact') }}
             </x-jet-responsive-nav-link>
 
-        @role('admin')
+        @can('admin')
             <x-jet-responsive-nav-link href="{{ route('posts.create') }}" :active="request()->routeIs('posts.create')">
                 {{ __('Create Post') }}
             </x-jet-responsive-nav-link>
@@ -200,7 +200,7 @@
             <x-jet-responsive-nav-link href="{{ route('books.create') }}" :active="request()->routeIs('books.create')">
                 {{ __('Book Review') }}
             </x-jet-responsive-nav-link>
-        @endrole
+        @endcan
         </div>
 
         <!-- Responsive Settings Options -->
@@ -217,6 +217,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                @auth
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
@@ -228,16 +229,27 @@
                     </x-jet-responsive-nav-link>
                 @endif
 
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
+                
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
 
-                    <x-jet-responsive-nav-link href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                        {{ __('Logout') }}
-                    </x-jet-responsive-nav-link>
-                </form>
+                        <x-jet-responsive-nav-link href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                            {{ __('Logout') }}
+                        </x-jet-responsive-nav-link>
+                    </form>
+                @else
+                    <x-jet-responsive-nav-link href="{{ route('login') }}">
+                        {{ __('Login') }}
+                    </x-jet-dropdown-link>
+
+                    <x-jet-responsive-nav-link href="{{ route('register') }}">
+                        {{ __('Register') }}
+                    </x-jet-dropdown-link>
+                @endauth
+            
 
                 <!-- Team Management -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
