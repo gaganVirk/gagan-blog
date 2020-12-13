@@ -23,18 +23,18 @@
 
     </head>
     <body class="min-h-screen font-serif antialiased bg-gray-100">
-        <div class="bg-gray-100">
+        <div class="bg-gray-100" id="content">
             @livewire('navigation-dropdown')
             
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
-            <footer>@include('layouts.footer')</footer>
         </div>
+
+        <footer class="flex">@include('layouts.footer')</footer>
         @stack('modals')
 
         @livewireScripts
-
     </body>
 </html>
