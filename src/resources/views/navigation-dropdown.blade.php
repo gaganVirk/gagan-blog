@@ -4,11 +4,13 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                {{-- <div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('pages.index') }}">
+                        {{-- <img src="{{ asset('/storage/logo/gaganLogo.PNG') }}" /> --}}
+                        
                         <x-jet-application-mark class="block h-9 w-auto" />
                     </a>
-                </div> --}}
+                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
