@@ -5,5 +5,4 @@
     </svg>
 </a> --}}
 
-<img src="{{ asset('storage/logo/gaganLogo.PNG') }}" />
-
+<img src="{{ config('app.logo') }}" />
