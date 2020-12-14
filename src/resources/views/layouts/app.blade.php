@@ -33,7 +33,7 @@
             </main>
         </div>
 
-        <footer class="flex">@include('layouts.footer')</footer>
+        <footer class="flex items-center">@include('layouts.footer')</footer>
         @stack('modals')
 
         @livewireScripts
