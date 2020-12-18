@@ -33,7 +33,7 @@ class PagesController extends Controller
 
     public function index() {
         $posts = Post::all();
-        $posts = Post::orderBy('created_at', 'desc')->skip(1)->take(2)->get();
+        $posts = Post::orderBy('created_at', 'desc')->take(2)->get();
         $books = Book::orderBy('created_at', 'desc')->take(2)->get();
 
         return view('pages.index')->with([
