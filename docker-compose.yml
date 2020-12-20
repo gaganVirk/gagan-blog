@@ -1,46 +1,6 @@
 version: '3'
 services:
   nginx:
-  - dockerfile_path: dockerfiles
-    git:
-      branch: master
-      repo_clone_url: git@github.com:gaganVirk/gagan-blog.git
-    github:
-      repo: digitalocean/gagan-blog
-      branch: master
-      deploy_on_push: true
-    name: gagan-blog
-    image:
-      registry_type: 
-      registry:
-      repository: gagan-blog
-      tag: latest
-    environment_slug:
-    envs:
-      -key:
-       value: GENERAL
-       scope: RUN_AND_BUILD_TIME
-       type: GENERAL
-    instance_size_slug: basic-xxs
-    instance_count: 1
-    http_port: default
-    routes:
-      path: ./
-    health_check:
-      initial_delay_seconds:
-      period_seconds:
-      timeout_seconds:
-      success_threshold:
-      failure_threshold:
-      http_path:
-    cros:
-      allow_origins:
-        exact: 
-        prefix: 
-        regex:
-    internal_ports:
-
-  nginx:
     build: ./dockerfiles/nginx/
     volumes:
       - ./dockerfiles/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
