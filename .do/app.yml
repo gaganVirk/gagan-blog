@@ -1,8 +1,0 @@
-name: gagan-blog
-services:
-- dockerfile_path: dockerfiles
-  github:
-    branch: master
-    deploy_on_push: true
-    repo: digitalocean/gagan-blog
-  name: gaga-blog
