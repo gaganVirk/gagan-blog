@@ -15,7 +15,7 @@
             Today, we can teach ourselves anything online with basic internet connection and a micro-processor, 
             and this idea of teaching yourself something on your own is a passion of mine. It is actually called Autodidacticism.
              I am teaching myself to program from the last four years. I have a keen interest in Laravel, C#.NET and Java. 
-             I sign up a lot of online courses and read technical books to learn new skills.</p>   
+             I sign up for a lot of online courses and read & write technical blogs to learn new skills.</p>   
     </div>
 </div>
 
