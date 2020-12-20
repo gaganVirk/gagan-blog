@@ -1,6 +1,16 @@
 version: '3'
 services:
   nginx:
+  - dockerfile_path: Dockerfile
+    git:
+      branch: master
+      repo_clone_url: git@github.com:gaganVirk/gagan-blog.git
+    github:
+      repo: digitalocean/gagan-blog
+      branch: master
+      deploy_on_push: true
+    name: gagan-blog
+  nginx:
     build: ./dockerfiles/nginx/
     volumes:
       - ./dockerfiles/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
