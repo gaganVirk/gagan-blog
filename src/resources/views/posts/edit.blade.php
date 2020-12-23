@@ -29,9 +29,18 @@
     <script src="{{ asset('js/ckeditor/build/ckeditor.js') }}"></script>
 
     <script>
+        
         ClassicEditor
                 .create( document.querySelector( '#body' ), {
-                    toolbar: [ 'bold', 'italic', 'link', 'imageUpload' ],
+                    fontSize: {
+                        options: [
+                            'tiny',
+                            'default',
+                            'big'
+                        ]
+                    },
+                    toolbar: [ 'heading', '|', 'big', 'bold', 'italic', 'link', 'imageUpload', 'bulletedList', 'fontFamily' ],
+                    
                     simpleUpload: {
                         // The URL that the images are uploaded to.
                         uploadUrl: '{{ route('posts.upload-image') }}',
