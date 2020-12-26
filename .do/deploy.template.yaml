@@ -1,0 +1,8 @@
+spec:
+  name: gaganblog
+  services:
+  - dockerfile_path: dockerfiles
+    git:
+      branch: master
+      repo_clone_url: https://github.com/gaganVirk/gagan-blog.git
+    name: gagan-blog

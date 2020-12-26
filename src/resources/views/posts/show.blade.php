@@ -10,11 +10,8 @@
             <img class="mx-auto" src="{{ $image->path }}" alt="screenshot" width="200" height="300" >
         @endforeach
     </section>
-<<<<<<< HEAD
     <div class="m-auto px-4"> {!! $post->body !!}</div>
-=======
     <div class="px-4"> {!! $post->body !!}</div>
->>>>>>> 885f84c97bfc82c2e2702b15dcd4726e250ee866
     @role('admin')
     <div class="p-4 flex gap-2">
         <a href="{{ route('posts.edit', $post) }}" class="bg-blue-600 text-gray-200 rounded hover:bg-blue-500 px-4 py-2 focus:outline-none">Edit</a>
